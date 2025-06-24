@@ -1,0 +1,114 @@
+{
+  "resources": [
+    {
+      "id": "whitepaper-wef-2024",
+      "title": "World Economic Forum: Future of Sustainable Aviation",
+      "type": "whitepaper",
+      "description": "WEF analysis on sustainable aviation trends, policy implications, and investment opportunities for the aviation industry",
+      "thumbnail": "/images/resources/saf-report-thumb.jpg",
+      "path": "/resources/whitepapers/WEF.pdf",
+      "date": "2024-03-22",
+      "tags": ["WEF", "Policy", "Investment", "Global"],
+      "featured": true,
+      "previewPages": 3
+    },
+    {
+      "id": "whitepaper-saf-2024",
+      "title": "State of Sustainable Aviation 2024",
+      "type": "whitepaper",
+      "description": "Comprehensive analysis of the SAF market, adoption trends, and regulatory landscape",
+      "thumbnail": "/images/resources/saf-report-thumb.jpg",
+      "path": "/resources/whitepapers/whitepaper-state-of-saf-2024.pdf",
+      "date": "2024-03-15",
+      "tags": ["SAF", "Market Analysis", "Regulatory"],
+      "featured": true,
+      "previewPages": 2
+    },
+    {
+      "id": "case-study-airline-emissions",
+      "title": "Major Airline SAF Integration",
+      "type": "case-study",
+      "description": "How a leading airline achieved 15% emissions reduction through strategic SAF adoption",
+      "thumbnail": "/images/resources/airline-case-study-thumb.jpg",
+      "path": "/resources/case-studies/case-study-airline-emissions-reduction-2023.pdf",
+      "date": "2023-11-08",
+      "tags": ["Airline", "Emissions Reduction", "Implementation"],
+      "featured": true,
+      "previewPages": 2
+    },
+    {
+      "id": "guide-carbon-accounting",
+      "title": "Aviation Carbon Accounting Guide",
+      "type": "guide",
+      "description": "Step-by-step methodology for accurate carbon accounting in aviation operations",
+      "thumbnail": "/images/resources/carbon-accounting-thumb.jpg",
+      "path": "/resources/guides/guide-aviation-carbon-accounting-2024.pdf",
+      "date": "2024-01-22",
+      "tags": ["Carbon Accounting", "Methodology", "Compliance"],
+      "featured": false,
+      "previewPages": 2
+    },
+    {
+      "id": "presentation-future-saf",
+      "title": "The Future of SAF Production",
+      "type": "presentation",
+      "description": "Expert presentation on emerging SAF production pathways and feedstock innovations",
+      "thumbnail": "/images/resources/saf-production-thumb.jpg",
+      "path": "/resources/presentations/presentation-future-saf-production-2024.pdf",
+      "date": "2024-02-10",
+      "tags": ["Production", "Technology", "Innovation"],
+      "featured": false,
+      "previewPages": 2
+    },
+    {
+      "id": "whitepaper-market-forecast",
+      "title": "SAF Market Forecast 2025-2030",
+      "type": "whitepaper",
+      "description": "Projection of SAF production capacity, market trends, and regional availability",
+      "thumbnail": "/images/resources/market-forecast-thumb.jpg",
+      "path": "/resources/whitepapers/whitepaper-saf-market-forecast-2025-2030.pdf",
+      "date": "2024-02-28",
+      "tags": ["Market Forecast", "Regional Analysis"],
+      "featured": true,
+      "previewPages": 2
+    },
+    {
+      "id": "guide-regulatory-compliance",
+      "title": "SAF Regulatory Compliance Guide",
+      "type": "guide",
+      "description": "Navigate complex regulatory requirements for SAF across major global markets",
+      "thumbnail": "/images/resources/regulatory-compliance-thumb.jpg",
+      "path": "/resources/guides/guide-saf-regulatory-compliance-2024.pdf",
+      "date": "2024-03-05",
+      "tags": ["Regulatory", "Compliance", "Global"],
+      "featured": false,
+      "previewPages": 2
+    }
+  ],
+  "categories": [
+    {
+      "id": "whitepaper",
+      "name": "Whitepapers & Reports",
+      "description": "In-depth research and analysis on sustainable aviation",
+      "icon": "document"
+    },
+    {
+      "id": "case-study",
+      "name": "Case Studies",
+      "description": "Real-world examples of successful SAF implementations",
+      "icon": "case-study"
+    },
+    {
+      "id": "guide",
+      "name": "Guides & Toolkits",
+      "description": "Practical resources to help implement sustainability initiatives",
+      "icon": "guide" 
+    },
+    {
+      "id": "presentation",
+      "name": "Presentations & Webinars",
+      "description": "Expert presentations and recorded webinar content",
+      "icon": "presentation"
+    }
+  ]
+} 

@@ -1,0 +1,12 @@
+<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+    <circle cx="2" cy="2" r="1" fill="#0099CC" fill-opacity="0.15"/>
+    <circle cx="10" cy="10" r="1" fill="#0099CC" fill-opacity="0.1"/>
+    <circle cx="18" cy="18" r="1" fill="#0099CC" fill-opacity="0.15"/>
+  </pattern>
+  <rect width="100%" height="100%" fill="url(#dots)" />
+  
+  <!-- Decorative elements -->
+  <path d="M100,50 Q150,150 200,100 T300,150" stroke="#0099CC" stroke-width="60" stroke-opacity="0.03" fill="none"/>
+  <path d="M50,250 Q100,150 150,200 T200,100" stroke="#0099CC" stroke-width="40" stroke-opacity="0.02" fill="none"/>
+</svg> 

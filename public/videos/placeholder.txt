@@ -1,0 +1,35 @@
+Video Files Required:
+
+1. airplane-landing.mp4
+   - Content: Video of an airplane landing
+   - Duration: 3-10 seconds
+   - Resolution: 1920x1080 or higher recommended
+   - Place in this directory (/public/videos/)
+
+2. airport-runway.mp4
+   - Content: Video showing movement on an airport runway
+   - Duration: 3-10 seconds
+   - Resolution: 1920x1080 or higher recommended
+   - Place in this directory (/public/videos/)
+
+3. aircraft-takeoff.mp4
+   - Content: Video of an airplane taking off
+   - Duration: 3-10 seconds
+   - Resolution: 1920x1080 or higher recommended
+   - Place in this directory (/public/videos/)
+
+4. cockpit-view.mp4
+   - Content: Video showing a cockpit view during flight
+   - Duration: 3-10 seconds
+   - Resolution: 1920x1080 or higher recommended
+   - Place in this directory (/public/videos/)
+
+5. aerial-clouds.mp4
+   - Content: Aerial view flying above clouds
+   - Duration: 3-10 seconds
+   - Resolution: 1920x1080 or higher recommended
+   - Place in this directory (/public/videos/)
+
+These videos will be used for the background of the hero section on the homepage, with each playing for approximately 3 seconds before transitioning to the next.
+
+Note: Until these videos are provided, you may see a blank background or error on the homepage. 
