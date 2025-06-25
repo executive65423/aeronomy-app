@@ -13,10 +13,15 @@ import {
 const createEmailTransporter = () => {
   try {
     return nodemailer.createTransporter({
-      service: 'gmail',
+      host: 'smtpout.secureserver.net',
+      port: 465,
+      secure: true, // true for 465, false for other ports
       auth: {
-        user: process.env.EMAIL_USER || 'your-email@gmail.com',
-        pass: process.env.EMAIL_PASS || 'your-app-password'
+        user: process.env.EMAIL_USER || 'noreply@aeronomy.com',
+        pass: process.env.EMAIL_PASS || 'your-email-password'
+      },
+      tls: {
+        rejectUnauthorized: false
       }
     });
   } catch (error) {
