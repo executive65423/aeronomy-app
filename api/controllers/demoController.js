@@ -13,15 +13,15 @@ import {
 const createEmailTransporter = () => {
   try {
     return nodemailer.createTransporter({
-      host: 'smtpout.secureserver.net',
-      port: 465,
-      secure: true, // true for 465, false for other ports
+      host: process.env.SMTP_HOST || 'smtpout.secureserver.net',
+      port: parseInt(process.env.SMTP_PORT) || 465,
+      secure: process.env.SMTP_SECURE === 'true' || true, // true for 465, false for other ports
       auth: {
         user: process.env.EMAIL_USER || 'noreply@aeronomy.com',
         pass: process.env.EMAIL_PASS || 'your-email-password'
       },
       tls: {
-        rejectUnauthorized: false
+        rejectUnauthorized: process.env.SMTP_REJECT_UNAUTHORIZED === 'true' || false
       }
     });
   } catch (error) {
