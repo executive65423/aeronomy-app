@@ -7,15 +7,18 @@ interface RequestDemoProps {
 
 const RequestDemo = ({ onClose }: RequestDemoProps) => {
   const [formData, setFormData] = useState({
+    fullName: '',
     email: '',
-    companyName: ''
+    organizationName: '',
+    role: '',
+    message: ''
   });
 
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -28,8 +31,8 @@ const RequestDemo = ({ onClose }: RequestDemoProps) => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    if (!formData.email || !formData.companyName) {
-      setError('Please fill in all fields');
+    if (!formData.fullName || !formData.email || !formData.organizationName || !formData.role) {
+      setError('Please fill in all required fields');
       return;
     }
 
@@ -123,6 +126,22 @@ const RequestDemo = ({ onClose }: RequestDemoProps) => {
           )}
 
           <div>
+            <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">
+              Full Name *
+            </label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sustainability focus:border-sustainability transition-colors"
+              placeholder="John Doe"
+            />
+          </div>
+
+          <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
               Email Address *
             </label>
@@ -139,18 +158,49 @@ const RequestDemo = ({ onClose }: RequestDemoProps) => {
           </div>
 
           <div>
-            <label htmlFor="companyName" className="block text-sm font-medium text-gray-700 mb-2">
-              Company Name *
+            <label htmlFor="organizationName" className="block text-sm font-medium text-gray-700 mb-2">
+              Organization Name *
             </label>
             <input
               type="text"
-              id="companyName"
-              name="companyName"
-              value={formData.companyName}
+              id="organizationName"
+              name="organizationName"
+              value={formData.organizationName}
               onChange={handleChange}
               required
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sustainability focus:border-sustainability transition-colors"
               placeholder="Your Company Name"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-2">
+              Role/Title *
+            </label>
+            <input
+              type="text"
+              id="role"
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sustainability focus:border-sustainability transition-colors"
+              placeholder="e.g., Sustainability Manager, Procurement Director"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+              Additional Message (Optional)
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows={3}
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sustainability focus:border-sustainability transition-colors resize-none"
+              placeholder="Tell us about your SAF procurement needs..."
             />
           </div>
 
