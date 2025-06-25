@@ -1,5 +1,5 @@
 import express from 'express';
-import { protect } from './middleware/auth.js';
+import { authMiddleware } from './middleware/auth.js';
 import {
   getProfile,
   updateProfile,
@@ -14,7 +14,7 @@ import {
 const router = express.Router();
 
 // Apply authentication middleware to all routes
-router.use(protect);
+router.use(authMiddleware);
 
 // Profile routes
 router.get('/profile', getProfile);
