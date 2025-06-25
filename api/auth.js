@@ -1,5 +1,5 @@
 import express from 'express';
-import { protect } from './middleware/auth.js';
+import { authMiddleware } from './middleware/auth.js';
 import {
   signup,
   login,
@@ -19,9 +19,9 @@ router.post('/forgot-password', forgotPassword);
 router.post('/reset-password/:token', resetPassword);
 
 // Protected routes
-router.get('/me', protect, getCurrentUser);
-router.post('/logout', protect, logout);
-router.put('/change-password', protect, changePassword);
+router.get('/me', authMiddleware, getCurrentUser);
+router.post('/logout', authMiddleware, logout);
+router.put('/change-password', authMiddleware, changePassword);
 
 // Health check
 router.get('/health', async (req, res) => {
