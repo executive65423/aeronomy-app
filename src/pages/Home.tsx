@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom'
 import { useRef, useState, Dispatch, SetStateAction, useEffect } from 'react'
 import RequestDemo from '../components/RequestDemo'
 import FloatingDashboard from '../components/FloatingDashboard'
+import { 
+  FiShoppingCart, FiUsers, FiBarChart, FiShield, 
+  FiGlobe, FiSmartphone, FiArrowRight, FiCheck,
+  FiTrendingUp, FiSettings, FiLayers, FiTarget
+} from 'react-icons/fi'
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -293,6 +298,175 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
 
   // State for player tabs
   const [selectedPlayerTab, setSelectedPlayerTab] = useState('airlines');
+
+  // Additional state for Features section
+  const [activeSection, setActiveSection] = useState(0)
+  const [expandedWorkflow, setExpandedWorkflow] = useState<string | null>(null)
+
+  // Feature sections data
+  const featureSections = [
+    {
+      id: 'procurement',
+      title: 'Procurement Lifecycle',
+      subtitle: 'SAF Procurement Made Simple',
+      icon: FiShoppingCart,
+      color: 'from-blue-500 to-cyan-500',
+      description: 'End-to-end procurement workflows inspired by enterprise P2P solutions'
+    },
+    {
+      id: 'suppliers',
+      title: 'Supplier Management',
+      subtitle: 'Vetted SAF Network',
+      icon: FiUsers,
+      color: 'from-purple-500 to-indigo-500',
+      description: 'Comprehensive supplier lifecycle management and verification'
+    },
+    {
+      id: 'analytics',
+      title: 'Analytics & Insights',
+      subtitle: 'Data-Driven Decisions',
+      icon: FiBarChart,
+      color: 'from-green-500 to-emerald-500',
+      description: 'Real-time carbon tracking and intelligent decision support'
+    },
+    {
+      id: 'compliance',
+      title: 'Compliance & MRV',
+      subtitle: 'Regulatory Excellence',
+      icon: FiShield,
+      color: 'from-orange-500 to-red-500',
+      description: 'Automated compliance and measurement, reporting, verification'
+    },
+    {
+      id: 'marketplace',
+      title: 'Network & Marketplace',
+      subtitle: 'Global SAF Exchange',
+      icon: FiGlobe,
+      color: 'from-teal-500 to-blue-500',
+      description: 'Connect with SAF suppliers worldwide through our marketplace'
+    },
+    {
+      id: 'interface',
+      title: 'User Experience',
+      subtitle: 'Intuitive Platform',
+      icon: FiSmartphone,
+      color: 'from-pink-500 to-purple-500',
+      description: 'Modern, role-based interfaces designed for efficiency'
+    }
+  ]
+
+  // Procurement workflow stages
+  const procurementWorkflows = [
+    {
+      id: 'requisition',
+      title: 'Requisition Creation',
+      description: 'Internal request to procure SAF based on volume, blend level, and delivery window.',
+      icon: '📝',
+      step: 1
+    },
+    {
+      id: 'validation',
+      title: 'Blending & Feedstock Validation',
+      description: 'Automatic check of buyer blending requirements + feedstock preferences (e.g., used cooking oil, ethanol).',
+      icon: '🔬',
+      step: 2
+    },
+    {
+      id: 'emissions',
+      title: 'Emissions Eligibility Gate',
+      description: 'Apply filters for feedstock origin, lifecycle GHG data, and regional compliance (e.g., EU ETS, CORSIA).',
+      icon: '🌱',
+      step: 3
+    },
+    {
+      id: 'rfq',
+      title: 'RFQ / Tender Workflow',
+      description: 'Generate and send Request for Quotation to approved SAF suppliers.',
+      icon: '📋',
+      step: 4
+    },
+    {
+      id: 'evaluation',
+      title: 'Quote Evaluation',
+      description: 'Weighted scoring of quotes: price, carbon intensity, location, certifications.',
+      icon: '⚖️',
+      step: 5
+    },
+    {
+      id: 'contract',
+      title: 'Contract Authoring',
+      description: 'Digitized offtake agreement with built-in ESG clauses and volume tranches.',
+      icon: '📄',
+      step: 6
+    },
+    {
+      id: 'po',
+      title: 'PO Generation',
+      description: 'Auto-create and dispatch Purchase Order via platform.',
+      icon: '🛒',
+      step: 7
+    },
+    {
+      id: 'receipt',
+      title: 'Goods Receipt Confirmation',
+      description: 'Confirm SAF delivery (volume, quality, location) by buyer or third-party.',
+      icon: '✅',
+      step: 8
+    },
+    {
+      id: 'match',
+      title: '3-Way Match Engine',
+      description: 'Validate invoice against PO and confirmed emissions performance (MRV data).',
+      icon: '🔍',
+      step: 9
+    },
+    {
+      id: 'payment',
+      title: 'Payment Execution',
+      description: 'Sync with ERP or payment processor; notify supplier and confirm on ledger.',
+      icon: '💳',
+      step: 10
+    }
+  ]
+
+  // Feature categories
+  const featureCategories = {
+    suppliers: [
+      { title: 'Supplier Onboarding Portal', desc: 'Streamlined registration with certification collection' },
+      { title: 'Tiered Verification System', desc: 'Bronze to Platinum supplier status levels' },
+      { title: 'Performance Scorecards', desc: 'Real-time supplier performance metrics' },
+      { title: 'Re-certification Workflow', desc: 'Automated certification renewal alerts' },
+      { title: 'Supplier Risk Engine', desc: 'AI-powered risk assessment and monitoring' }
+    ],
+    analytics: [
+      { title: 'Carbon Impact Dashboard', desc: 'Real-time GHG reduction visualization' },
+      { title: 'Spend & Emission Forecasting', desc: 'Predictive budget and carbon analysis' },
+      { title: 'Greenwashing Detector', desc: '3-way emission validation system' },
+      { title: 'Supplier Comparison Tool', desc: 'Multi-criteria supplier benchmarking' },
+      { title: 'Procurement ROI Calculator', desc: 'Cost per ton CO₂ reduced analysis' }
+    ],
+    compliance: [
+      { title: 'Digital MRV Pipeline', desc: 'Integrated lifecycle emissions validation' },
+      { title: 'ESG Clause Templates', desc: 'Standard sustainability contract language' },
+      { title: 'Audit Reporting Module', desc: 'ICAO, EU ETS, CDP compliant reports' },
+      { title: 'Decarbonization Registry Sync', desc: 'Automated carbon credit retirement' },
+      { title: 'Transaction Ledger', desc: 'Immutable procurement event logging' }
+    ],
+    marketplace: [
+      { title: 'SAF Supplier Directory', desc: 'Searchable global supplier database' },
+      { title: 'Live SAF Price Index', desc: 'Real-time regional pricing data' },
+      { title: 'Bid/Reverse Auction System', desc: 'Competitive procurement platform' },
+      { title: 'Pre-negotiated Frameworks', desc: 'Instant procurement with vetted suppliers' },
+      { title: 'Bulk Buyer Aggregation', desc: 'Volume leverage for smaller buyers' }
+    ],
+    interface: [
+      { title: 'Guided Procurement Flow', desc: 'Step-by-step compliance-driven interface' },
+      { title: 'Role-Based Dashboards', desc: 'Custom views for different user types' },
+      { title: 'Smart Alerts System', desc: 'Proactive notifications and reminders' },
+      { title: 'Mobile Vendor Portal', desc: 'On-the-go supplier management' },
+      { title: 'Timeline Visualizer', desc: 'Real-time procurement progress tracking' }
+    ]
+  }
 
   return (
     <div className="pt-0">
@@ -1370,56 +1544,179 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
         </div>
       </section>
 
-      {/* Data Insights Section */}
-      <section className="py-20 relative"
+      {/* Enhanced Features Hero Section */}
+      <section 
+        className="relative py-20 md:py-32 overflow-hidden"
         style={{
-          backgroundImage: "url('/images/data-bg.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center"
+          backgroundImage: "linear-gradient(135deg, #0A2342 0%, #00A0DC 50%, #4CAF50 100%)"
         }}
       >
-        {/* Overlay for readability */}
-        <div className="absolute inset-0 bg-navy/80"></div>
+        <div className="absolute inset-0 bg-black/20"></div>
         
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-sustainability/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        </div>
+
         <div className="container mx-auto px-4 relative z-10">
-          <motion.h2 
-            ref={insightsRef}
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInsightsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl font-bold text-center mb-6 text-white"
+            transition={{ duration: 0.8 }}
+            className="text-center max-w-5xl mx-auto"
           >
-            Data-Driven Insights
-          </motion.h2>
-          
-          <p className="text-center text-white/80 mb-12 max-w-3xl mx-auto">
-            Our platform delivers real-time actionable insights backed by comprehensive data analysis and predictive modeling.
-          </p>
-          
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {insights.map((insight, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                animate={isInsightsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-                transition={{ duration: 0.7, delay: index * 0.2 }}
-                className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl border border-white/20 shadow-xl"
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={isInsightsInView ? { scale: 1 } : { scale: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-8"
+            >
+              <FiLayers className="mr-2 text-white" />
+              <span className="text-white font-medium">Enterprise-Grade SAF Procurement Platform</span>
+            </motion.div>
+
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+              Next-Generation{' '}
+              <span className="bg-gradient-to-r from-sustainability to-blue-300 bg-clip-text text-transparent">
+                SAF Workflows
+              </span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
+              Comprehensive procurement lifecycle management inspired by enterprise solutions,
+              <br className="hidden md:block" />
+              designed specifically for sustainable aviation fuel sourcing.
+            </p>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={isInsightsInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white text-navy px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-colors shadow-xl"
               >
-                <h3 className="text-xl font-bold mb-4 text-white">{insight.title}</h3>
-                <p className="text-white/90 mb-6">{insight.description}</p>
-                
-                {/* Chart placeholder */}
-                <div className="mb-6">
-                  {insight.chartComponent}
-                </div>
-                
-                <div className="flex justify-between items-center">
-                  <span className="text-sustainability font-medium">
-                    Traditional: ±{insight.data.traditional}%
-                  </span>
-                  <span className="text-white font-medium">
-                    Aeronomy: ±{insight.data.aeronomy}%
-                  </span>
+                Explore Workflows
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white/10 backdrop-blur-sm text-white border border-white/30 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition-colors"
+              >
+                Watch Demo
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Feature Sections Navigation */}
+      <section className="py-16 bg-white dark:bg-dark-bg">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-navy dark:text-white mb-4">
+              Platform Capabilities
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Six core modules that power the future of sustainable aviation fuel procurement
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featureSections.map((section, index) => {
+              const IconComponent = section.icon
+              return (
+                <motion.div
+                  key={section.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                  className={`relative p-8 rounded-2xl bg-gradient-to-br ${section.color} cursor-pointer group overflow-hidden`}
+                  onClick={() => setActiveSection(index)}
+                >
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors"></div>
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-4">
+                      <IconComponent className="w-8 h-8 text-white" />
+                      <FiArrowRight className="w-5 h-5 text-white/70 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-2">{section.title}</h3>
+                    <p className="text-sm text-white/80 mb-3">{section.subtitle}</p>
+                    <p className="text-sm text-white/70">{section.description}</p>
+                  </div>
+                </motion.div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Procurement Workflows Detail */}
+      <section className="py-20 bg-gray-50 dark:bg-dark-surface">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInsightsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-navy dark:text-white mb-4">
+              🛠 Procurement Lifecycle Workflows
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto">
+              Comprehensive P2P (Procure-to-Pay) workflows designed specifically for SAF procurement,
+              ensuring compliance, transparency, and efficiency at every step.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {procurementWorkflows.map((workflow, index) => (
+              <motion.div
+                key={workflow.id}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                animate={isInsightsInView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className={`p-6 bg-white dark:bg-dark-card rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer border-l-4 border-sustainability ${
+                  expandedWorkflow === workflow.id ? 'ring-2 ring-sustainability/20' : ''
+                }`}
+                onClick={() => setExpandedWorkflow(expandedWorkflow === workflow.id ? null : workflow.id)}
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 bg-sustainability/10 rounded-lg flex items-center justify-center text-2xl">
+                      {workflow.icon}
+                    </div>
+                    <div className="w-8 h-8 bg-sustainability rounded-full flex items-center justify-center text-white text-sm font-bold mt-2 mx-2">
+                      {workflow.step}
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold text-navy dark:text-white mb-2">
+                      {workflow.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                      {workflow.description}
+                    </p>
+                    {expandedWorkflow === workflow.id && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"
+                      >
+                        <div className="flex items-center text-sustainability text-sm">
+                          <FiCheck className="mr-2" />
+                          <span>Automated workflow with real-time tracking</span>
+                        </div>
+                      </motion.div>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -1427,7 +1724,74 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
         </div>
       </section>
 
-      {/* Market Predictions Section - New Design */}
+      {/* Feature Categories */}
+      <section className="py-20 bg-white dark:bg-dark-bg">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInsightsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-navy dark:text-white mb-4">
+              Advanced Platform Features
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300">
+              Comprehensive tools for every aspect of SAF procurement and management
+            </p>
+          </motion.div>
+
+          <div className="space-y-16">
+            {Object.entries(featureCategories).map(([category, features], categoryIndex) => {
+              const section = featureSections.find(s => s.id === category)
+              if (!section) return null
+              
+              const IconComponent = section.icon
+
+              return (
+                <motion.div
+                  key={category}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={isInsightsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                  transition={{ duration: 0.8, delay: categoryIndex * 0.2 }}
+                  className="bg-gray-50 dark:bg-dark-surface rounded-2xl p-8"
+                >
+                  <div className="flex items-center mb-8">
+                    <div className={`p-4 rounded-xl bg-gradient-to-br ${section.color} mr-4`}>
+                      <IconComponent className="w-8 h-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-navy dark:text-white">{section.title}</h3>
+                      <p className="text-gray-600 dark:text-gray-300">{section.description}</p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {features.map((feature, featureIndex) => (
+                      <motion.div
+                        key={featureIndex}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={isInsightsInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                        transition={{ duration: 0.6, delay: (categoryIndex * 0.2) + (featureIndex * 0.1) }}
+                        whileHover={{ y: -5 }}
+                        className="bg-white dark:bg-dark-card p-6 rounded-xl shadow-md hover:shadow-lg transition-all"
+                      >
+                        <div className="flex items-start space-x-3">
+                          <div className="w-2 h-2 bg-sustainability rounded-full mt-2 flex-shrink-0"></div>
+                          <div>
+                            <h4 className="font-semibold text-navy dark:text-white mb-2">{feature.title}</h4>
+                            <p className="text-sm text-gray-600 dark:text-gray-300">{feature.desc}</p>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
       <section className="py-24 relative overflow-hidden">
         <video
           autoPlay
@@ -1466,6 +1830,46 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
         </div>
       </section>
 
+
+      {/* Enhanced CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-navy to-sustainability">
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Ready to Transform Your SAF Procurement?
+            </h2>
+            <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+              Join leading airlines already using Aeronomy's platform to streamline their 
+              sustainable aviation fuel sourcing and compliance workflows.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white text-navy px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-colors shadow-xl"
+                onClick={() => toggleModal(true)}
+              >
+                Request Demo
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white/10 backdrop-blur-sm text-white border border-white/30 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition-colors"
+              >
+                View Pricing
+              </motion.button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Market Predictions Section - New Design */}
+     
       {/* Show the demo modal when requested */}
       {isModalVisible && <RequestDemo onClose={() => toggleModal(false)} />}
     </div>
