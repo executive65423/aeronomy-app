@@ -1550,6 +1550,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
 
       {/* Enhanced Features Hero Section */}
       <section 
+        id="features"
         ref={insightsRef}
         className="relative py-20 md:py-32 overflow-hidden"
         style={{
