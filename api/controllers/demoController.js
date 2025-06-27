@@ -9,58 +9,166 @@ import {
   logError
 } from '../middleware/errorHandler.js';
 
-// Email configuration
+// Enhanced email configuration for Railway production
 const createEmailTransporter = () => {
   try {
-    return nodemailer.createTransporter({
-      host: process.env.SMTP_HOST || 'smtpout.secureserver.net',
-      port: parseInt(process.env.SMTP_PORT) || 465,
-      secure: process.env.SMTP_SECURE === 'true' || true, // true for 465, false for other ports
+    // Railway production configuration
+    const emailConfig = {
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT) || 587,
+      secure: process.env.SMTP_SECURE === 'true', // true for 465, false for 587
       auth: {
-        user: process.env.EMAIL_USER || 'noreply@aeronomy.com',
-        pass: process.env.EMAIL_PASS || 'your-email-password'
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
       },
       tls: {
-        rejectUnauthorized: process.env.SMTP_REJECT_UNAUTHORIZED === 'true' || false
+        rejectUnauthorized: process.env.SMTP_REJECT_UNAUTHORIZED !== 'false'
       }
+    };
+
+    // Log configuration status (without sensitive data)
+    console.log('📧 Email configuration status:', {
+      host: emailConfig.host ? '✅ Set' : '❌ Missing',
+      port: emailConfig.port,
+      secure: emailConfig.secure,
+      user: emailConfig.auth.user ? '✅ Set' : '❌ Missing',
+      password: emailConfig.auth.pass ? '✅ Set' : '❌ Missing',
+      environment: process.env.NODE_ENV || 'development'
     });
+
+    return nodemailer.createTransporter(emailConfig);
   } catch (error) {
+    console.error('❌ Email transporter creation failed:', error.message);
     logError(error);
     throw new ExternalServiceError('Email service configuration failed');
   }
 };
 
-// Verify email transporter
+// Enhanced email service verification
 const verifyEmailService = async () => {
   try {
+    // Check if required environment variables are present
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS || !process.env.SMTP_HOST) {
+      console.warn('⚠️  Email service not configured - missing environment variables');
+      return false;
+    }
+
     const transporter = createEmailTransporter();
     await transporter.verify();
+    console.log('✅ Email service verified successfully');
     return true;
   } catch (error) {
-    console.warn('⚠️  Email service not configured properly:', error.message);
+    console.warn('⚠️  Email service verification failed:', error.message);
     return false;
   }
 };
 
-// Generate enhanced email template
+// Enhanced email template with production-ready styling
 const generateDemoEmailTemplate = (data) => {
   const { fullName, email, organizationName, role, message, timestamp } = data;
   
   return {
-    subject: `🚀 Demo Request from ${organizationName} | Aeronomy Platform`,
+    subject: `🚀 URGENT: Demo Request from ${organizationName} | Aeronomy Platform`,
     html: `
       <!DOCTYPE html>
       <html>
       <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Demo Request - Aeronomy Platform</title>
         <style>
-          body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
-          .container { max-width: 600px; margin: 0 auto; padding: 20px; background: #f9f9f9; }
-          .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
-          .content { background: white; padding: 30px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-          .field { margin: 15px 0; padding: 10px; background: #f8f9fa; border-left: 4px solid #667eea; }
-          .field strong { color: #667eea; }
-          .footer { text-align: center; margin-top: 20px; color: #666; font-size: 12px; }
-          .priority { background: #fff3cd; border-left-color: #ffc107; }
+          body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            color: #333; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f4f4f4;
+          }
+          .container { 
+            max-width: 600px; 
+            margin: 20px auto; 
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+          }
+          .header { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            color: white; 
+            padding: 40px 30px; 
+            text-align: center;
+          }
+          .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+          }
+          .header p {
+            margin: 10px 0 0 0;
+            font-size: 16px;
+            opacity: 0.9;
+          }
+          .content { 
+            padding: 40px 30px;
+          }
+          .field { 
+            margin: 20px 0; 
+            padding: 16px; 
+            background: #f8f9fa; 
+            border-left: 5px solid #667eea;
+            border-radius: 0 8px 8px 0;
+          }
+          .field strong { 
+            color: #667eea; 
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+          }
+          .field-value {
+            font-size: 16px;
+            line-height: 1.5;
+          }
+          .priority { 
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%); 
+            border-left-color: #f39c12;
+            animation: pulse 2s infinite;
+          }
+          @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+          }
+          .message-box {
+            margin-top: 15px; 
+            padding: 20px; 
+            background: white; 
+            border-radius: 8px; 
+            border: 2px solid #e9ecef;
+            font-style: italic;
+          }
+          .footer { 
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center; 
+            color: #666; 
+            font-size: 14px; 
+            border-top: 1px solid #e9ecef;
+          }
+          .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin: 20px 0;
+            transition: transform 0.2s;
+          }
+          .cta-button:hover {
+            transform: translateY(-2px);
+          }
         </style>
       </head>
       <body>
@@ -71,164 +179,222 @@ const generateDemoEmailTemplate = (data) => {
           </div>
           <div class="content">
             <div class="field priority">
-              <strong>⏰ Timestamp:</strong> ${timestamp}
+              <strong>⏰ Request Time:</strong>
+              <div class="field-value">${new Date(timestamp).toLocaleString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                timeZoneName: 'short'
+              })}</div>
             </div>
             <div class="field">
-              <strong>👤 Full Name:</strong> ${fullName}
+              <strong>👤 Contact Person:</strong>
+              <div class="field-value">${fullName}</div>
             </div>
             <div class="field">
-              <strong>📧 Email:</strong> ${email}
+              <strong>📧 Email Address:</strong>
+              <div class="field-value"><a href="mailto:${email}" style="color: #667eea; text-decoration: none;">${email}</a></div>
             </div>
             <div class="field">
-              <strong>🏢 Organization:</strong> ${organizationName}
+              <strong>🏢 Organization:</strong>
+              <div class="field-value">${organizationName}</div>
             </div>
             <div class="field">
-              <strong>💼 Role:</strong> ${role}
+              <strong>💼 Position/Role:</strong>
+              <div class="field-value">${role}</div>
             </div>
             <div class="field">
-              <strong>💬 Message:</strong><br>
-              <div style="margin-top: 10px; padding: 15px; background: white; border-radius: 5px; border: 1px solid #e9ecef;">
+              <strong>💬 Message/Requirements:</strong>
+              <div class="message-box">
                 ${message || 'No additional message provided.'}
               </div>
             </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+              <a href="mailto:${email}?subject=Re: Demo Request - Aeronomy Platform&body=Hi ${fullName}," class="cta-button">
+                📧 Reply to Customer
+              </a>
+            </div>
           </div>
           <div class="footer">
+            <p><strong>⚡ Action Required:</strong> Please respond within 24 hours to maintain high customer satisfaction.</p>
             <p>This email was generated automatically by the Aeronomy Platform demo request system.</p>
-            <p>Please respond promptly to maintain customer engagement.</p>
+            <p><small>Environment: ${process.env.NODE_ENV || 'development'} | Timestamp: ${timestamp}</small></p>
           </div>
         </div>
       </body>
       </html>
     `,
     text: `
-      New Demo Request - Aeronomy Platform
+      NEW DEMO REQUEST - AERONOMY PLATFORM
       =====================================
       
-      Timestamp: ${timestamp}
-      Full Name: ${fullName}
+      🚨 URGENT: Please respond within 24 hours
+      
+      Request Time: ${new Date(timestamp).toLocaleString()}
+      Contact Person: ${fullName}
       Email: ${email}
       Organization: ${organizationName}
       Role: ${role}
       
-      Message:
+      Message/Requirements:
       ${message || 'No additional message provided.'}
+      
+      =====================================
+      Next Steps:
+      1. Reply to customer within 24 hours
+      2. Schedule demo call
+      3. Send follow-up materials
+      
+      Reply directly to: ${email}
       
       ---
       This email was generated automatically by the Aeronomy Platform.
+      Environment: ${process.env.NODE_ENV || 'development'}
+      Timestamp: ${timestamp}
     `
   };
 };
 
-// @desc    Handle demo request
-// @route   POST /api/demo/request
-// @access  Public
+// Enhanced demo request handler with production optimizations
 export const submitDemoRequest = asyncHandler(async (req, res) => {
   const { fullName, email, organizationName, role, message } = req.body;
 
-  // Validate required fields
+  // Enhanced validation
   validateRequired({ fullName, email, organizationName, role });
-  
-  // Validate email format
   validateEmail(email);
   
-  // Validate field lengths
-  if (fullName.length > 100) {
+  // Sanitize and validate field lengths
+  const sanitizedData = {
+    fullName: fullName?.trim(),
+    email: email?.toLowerCase().trim(),
+    organizationName: organizationName?.trim(),
+    role: role?.trim(),
+    message: message?.trim() || ''
+  };
+  
+  if (sanitizedData.fullName.length > 100) {
     throw new ValidationError('Full name must be less than 100 characters');
   }
   
-  if (organizationName.length > 100) {
+  if (sanitizedData.organizationName.length > 100) {
     throw new ValidationError('Organization name must be less than 100 characters');
   }
   
-  if (role.length > 100) {
+  if (sanitizedData.role.length > 100) {
     throw new ValidationError('Role must be less than 100 characters');
   }
   
-  if (message && message.length > 1000) {
-    throw new ValidationError('Message must be less than 1000 characters');
+  if (sanitizedData.message.length > 2000) {
+    throw new ValidationError('Message must be less than 2000 characters');
   }
 
   const timestamp = new Date().toISOString();
   const demoData = {
-    fullName: fullName.trim(),
-    email: email.toLowerCase().trim(),
-    organizationName: organizationName.trim(),
-    role: role.trim(),
-    message: message ? message.trim() : '',
+    ...sanitizedData,
     timestamp
   };
 
+  // Enhanced logging for production
+  console.log(`📝 Demo request received: ${demoData.organizationName} (${demoData.email})`);
+
+  let emailSent = false;
+  let emailError = null;
+
   try {
-    // Check if email service is available
+    // Check email service availability
     const isEmailServiceAvailable = await verifyEmailService();
     
     if (isEmailServiceAvailable) {
       const transporter = createEmailTransporter();
       const emailTemplate = generateDemoEmailTemplate(demoData);
       
-      // Send email
-      await transporter.sendMail({
-        from: process.env.EMAIL_USER || 'noreply@aeronomy.com',
-        to: process.env.DEMO_EMAIL || 'demo@aeronomy.com',
+      // Send email with enhanced configuration
+      const emailResult = await transporter.sendMail({
+        from: `"Aeronomy Platform" <${process.env.EMAIL_USER}>`,
+        to: process.env.DEMO_EMAIL,
+        cc: process.env.DEMO_EMAIL_CC ? process.env.DEMO_EMAIL_CC.split(',') : undefined,
+        bcc: process.env.DEMO_EMAIL_BCC ? process.env.DEMO_EMAIL_BCC.split(',') : undefined,
         subject: emailTemplate.subject,
         html: emailTemplate.html,
-        text: emailTemplate.text
+        text: emailTemplate.text,
+        replyTo: demoData.email,
+        headers: {
+          'X-Priority': '1',
+          'X-MSMail-Priority': 'High',
+          'Importance': 'high'
+        }
       });
       
-      console.log(`✅ Demo request email sent: ${demoData.email} (${demoData.organizationName})`);
+      emailSent = true;
+      console.log(`✅ Demo request email sent successfully: ${demoData.email} (${demoData.organizationName})`);
+      console.log(`📧 Email ID: ${emailResult.messageId}`);
     } else {
-      console.log(`📝 Demo request logged (email service unavailable): ${demoData.email} (${demoData.organizationName})`);
+      console.warn(`⚠️  Email service unavailable - request logged: ${demoData.email} (${demoData.organizationName})`);
     }
 
-    res.status(200).json({
-      success: true,
-      message: 'Demo request submitted successfully! We will contact you soon.',
-      data: {
-        submittedAt: timestamp,
-        status: isEmailServiceAvailable ? 'email_sent' : 'logged',
-        contactInfo: {
-          email: demoData.email,
-          organization: demoData.organizationName
-        }
-      }
-    });
-
   } catch (error) {
-    // Log the error but don't fail the request
+    emailError = error;
     logError(error);
-    console.error('❌ Demo request email failed:', error.message);
-    
-    // Still return success since we received the request
-    console.log(`📝 Demo request logged (email failed): ${demoData.email} (${demoData.organizationName})`);
-    
-    res.status(200).json({
-      success: true,
-      message: 'Demo request received! We will contact you soon.',
-      data: {
-        submittedAt: timestamp,
-        status: 'logged',
-        contactInfo: {
-          email: demoData.email,
-          organization: demoData.organizationName
-        }
-      }
-    });
+    console.error(`❌ Demo request email failed: ${error.message}`);
+    console.error(`📝 Request details: ${demoData.email} (${demoData.organizationName})`);
   }
+
+  // Always respond with success (graceful degradation)
+  const response = {
+    success: true,
+    message: emailSent 
+      ? 'Demo request submitted successfully! We will contact you within 24 hours.' 
+      : 'Demo request received! We will contact you soon.',
+    data: {
+      submittedAt: timestamp,
+      status: emailSent ? 'email_sent' : 'logged',
+      contactInfo: {
+        email: demoData.email,
+        organization: demoData.organizationName,
+        fullName: demoData.fullName
+      },
+      ...(process.env.NODE_ENV === 'development' && { 
+        debug: {
+          emailService: emailSent ? 'working' : 'failed',
+          error: emailError?.message
+        }
+      })
+    }
+  };
+
+  res.status(200).json(response);
 });
 
-// @desc    Health check for demo service
-// @route   GET /api/demo/health
-// @access  Public
+// Enhanced health check with detailed email service status
 export const healthCheck = asyncHandler(async (req, res) => {
+  const startTime = Date.now();
   const isEmailServiceAvailable = await verifyEmailService();
+  const responseTime = Date.now() - startTime;
   
-  res.json({
+  const healthData = {
     success: true,
     data: {
       status: 'Demo service running',
-      emailService: isEmailServiceAvailable ? 'Available' : 'Unavailable',
+      emailService: {
+        status: isEmailServiceAvailable ? 'Available' : 'Unavailable',
+        configured: !!(process.env.EMAIL_USER && process.env.EMAIL_PASS && process.env.SMTP_HOST),
+        responseTime: `${responseTime}ms`
+      },
+      environment: process.env.NODE_ENV || 'development',
       timestamp: new Date().toISOString(),
-      version: '1.0.0'
+      version: '1.1.0',
+      features: {
+        emailNotifications: isEmailServiceAvailable,
+        requestValidation: true,
+        errorHandling: true,
+        logging: true
+      }
     }
-  });
+  };
+
+  res.json(healthData);
 }); 
