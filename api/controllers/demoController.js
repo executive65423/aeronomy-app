@@ -36,7 +36,7 @@ const createEmailTransporter = () => {
       environment: process.env.NODE_ENV || 'development'
     });
 
-    return nodemailer.createTransporter(emailConfig);
+    return nodemailer.createTransport(emailConfig);
   } catch (error) {
     console.error('❌ Email transporter creation failed:', error.message);
     logError(error);
