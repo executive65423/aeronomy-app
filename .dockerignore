@@ -11,4 +11,13 @@ coverage
 .env.test.local
 .env.production.local
 logs
-*.log 
+*.log
+
+# Large video files that slow down builds
+public/videos/*.mp4
+public/videos/sky.mp4
+public/videos/aircraft-takeoff.mp4
+public/videos/airport-runway.mp4
+public/videos/aerial-clouds.mp4
+public/videos/cockpit-view.mp4
+public/videos/airplane-landing.mp4 
