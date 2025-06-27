@@ -72,12 +72,16 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
   const statsRef = useRef(null);
   const featuresRef = useRef(null);
   const insightsRef = useRef(null);
+  const workflowsRef = useRef(null);
+  const platformFeaturesRef = useRef(null);
   
   // Check if elements are in view
   const isHeadingInView = useInView(headingRef, { once: true, amount: 0.3 });
   const isStatsInView = useInView(statsRef, { once: true, amount: 0.3 });
   const isFeaturesInView = useInView(featuresRef, { once: true, amount: 0.2 });
   const isInsightsInView = useInView(insightsRef, { once: true, amount: 0.2 });
+  const isWorkflowsInView = useInView(workflowsRef, { once: true, amount: 0.2 });
+  const isPlatformFeaturesInView = useInView(platformFeaturesRef, { once: true, amount: 0.2 });
   
   // State for hero video background
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
@@ -1546,6 +1550,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
 
       {/* Enhanced Features Hero Section */}
       <section 
+        ref={insightsRef}
         className="relative py-20 md:py-32 overflow-hidden"
         style={{
           backgroundImage: "linear-gradient(135deg, #0A2342 0%, #00A0DC 50%, #4CAF50 100%)"
@@ -1658,11 +1663,11 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
       </section>
 
       {/* Procurement Workflows Detail */}
-      <section className="py-20 bg-gray-50 dark:bg-dark-surface">
+      <section ref={workflowsRef} className="py-20 bg-gray-50 dark:bg-dark-surface">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={isInsightsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            animate={isWorkflowsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
@@ -1680,7 +1685,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
               <motion.div
                 key={workflow.id}
                 initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                animate={isInsightsInView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                animate={isWorkflowsInView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className={`p-6 bg-white dark:bg-dark-card rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer border-l-4 border-sustainability ${
                   expandedWorkflow === workflow.id ? 'ring-2 ring-sustainability/20' : ''
@@ -1725,11 +1730,11 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
       </section>
 
       {/* Feature Categories */}
-      <section className="py-20 bg-white dark:bg-dark-bg">
+      <section ref={platformFeaturesRef} className="py-20 bg-white dark:bg-dark-bg">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={isInsightsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            animate={isPlatformFeaturesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
@@ -1752,7 +1757,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                 <motion.div
                   key={category}
                   initial={{ opacity: 0, y: 50 }}
-                  animate={isInsightsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                  animate={isPlatformFeaturesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
                   transition={{ duration: 0.8, delay: categoryIndex * 0.2 }}
                   className="bg-gray-50 dark:bg-dark-surface rounded-2xl p-8"
                 >
@@ -1771,7 +1776,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                       <motion.div
                         key={featureIndex}
                         initial={{ opacity: 0, scale: 0.9 }}
-                        animate={isInsightsInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                        animate={isPlatformFeaturesInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                         transition={{ duration: 0.6, delay: (categoryIndex * 0.2) + (featureIndex * 0.1) }}
                         whileHover={{ y: -5 }}
                         className="bg-white dark:bg-dark-card p-6 rounded-xl shadow-md hover:shadow-lg transition-all"
@@ -1792,6 +1797,8 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
           </div>
         </div>
       </section>
+
+      {/* Market Predictions Section */}
       <section className="py-24 relative overflow-hidden">
         <video
           autoPlay
@@ -1830,7 +1837,6 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
         </div>
       </section>
 
-
       {/* Enhanced CTA Section */}
       <section className="py-20 bg-gradient-to-r from-navy to-sustainability">
         <div className="container mx-auto px-4 text-center">
@@ -1868,8 +1874,6 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
         </div>
       </section>
 
-      {/* Market Predictions Section - New Design */}
-     
       {/* Show the demo modal when requested */}
       {isModalVisible && <RequestDemo onClose={() => toggleModal(false)} />}
     </div>
