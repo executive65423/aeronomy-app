@@ -137,7 +137,7 @@ const RequestDemo = ({ onClose }: RequestDemoProps) => {
               onChange={handleChange}
               required
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sustainability focus:border-sustainability transition-colors"
-              placeholder="John Doe"
+              
             />
           </div>
 
@@ -153,7 +153,7 @@ const RequestDemo = ({ onClose }: RequestDemoProps) => {
               onChange={handleChange}
               required
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sustainability focus:border-sustainability transition-colors"
-              placeholder="john.doe@company.com"
+              
             />
           </div>
 
@@ -169,7 +169,7 @@ const RequestDemo = ({ onClose }: RequestDemoProps) => {
               onChange={handleChange}
               required
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sustainability focus:border-sustainability transition-colors"
-              placeholder="Your Company Name"
+              
             />
           </div>
 
@@ -185,7 +185,7 @@ const RequestDemo = ({ onClose }: RequestDemoProps) => {
               onChange={handleChange}
               required
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sustainability focus:border-sustainability transition-colors"
-              placeholder="e.g., Sustainability Manager, Procurement Director"
+              
             />
           </div>
 
@@ -200,7 +200,7 @@ const RequestDemo = ({ onClose }: RequestDemoProps) => {
               value={formData.message}
               onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sustainability focus:border-sustainability transition-colors resize-none"
-              placeholder="Tell us about your SAF procurement needs..."
+              
             />
           </div>
 
