@@ -6,7 +6,7 @@ import CustomScrollbar from './components/CustomScrollbar'
 import Footer from './components/Footer'
 // Temporarily comment out LoadingAnimation to test if it's causing the issue
 // import LoadingAnimation from './components/LoadingAnimation'
-
+//testing
 // Lazy load page components
 const Home = lazy(() => import('./pages/Home'))
 const About = lazy(() => import('./pages/About'))
