@@ -71,13 +71,19 @@
     @apply absolute inset-0 bg-gradient-to-b from-black/70 via-navy/60 to-black/50 backdrop-blur-[2px];
   }
   
-  /* Navigation styling for transparent navbar */
-  .nav-transparent {
-    @apply text-white font-medium transition-colors hover:text-sustainability;
+  /* Navigation styling for dynamic island navbar */
+  .nav-island {
+    @apply text-navy font-medium transition-colors duration-300 hover:text-sky-600;
   }
   
-  .nav-scrolled {
-    @apply text-navy dark:text-white font-medium transition-colors hover:text-sustainability;
+  /* Dynamic island logo styling */
+  .dynamic-island-logo span:first-child {
+    @apply text-white;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .dynamic-island-logo span:last-child {
+    @apply text-sustainability;
   }
   
   /* Glow effect for sustainability elements */

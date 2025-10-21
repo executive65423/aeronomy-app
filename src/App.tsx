@@ -11,6 +11,7 @@ import Footer from './components/Footer'
 const Home = lazy(() => import('./pages/Home'))
 const About = lazy(() => import('./pages/About'))
 const Resources = lazy(() => import('./pages/Resources'))
+const Solutions = lazy(() => import('./pages/Solutions'))
 const Products = lazy(() => import('./pages/products'))
 const Analytica = lazy(() => import('./pages/products/Analytica'))
 const SAFPRO = lazy(() => import('./pages/products/SAFPRO'))
@@ -82,6 +83,7 @@ function App() {
             <Route path="/" element={<Home showDemoModal={showDemoModal} setShowDemoModal={setShowDemoModal} />} />
             <Route path="/about" element={<About />} />
             <Route path="/resources" element={<Resources />} />
+            <Route path="/solutions" element={<Solutions />} />
             <Route path="/products" element={<Products />} />
             <Route path="/products/analytica" element={<Analytica />} />
             <Route path="/products/safpro" element={<SAFPRO />} />
