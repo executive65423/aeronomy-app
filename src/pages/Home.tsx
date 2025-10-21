@@ -23,30 +23,24 @@ const SLIDESHOW_CONTENT = [
     description: "Optimize SAF procurement with Aeronomica Analytica today"
   },
   {
-    title: "🚀 Stop Overpaying for SAF",
+    title: "Stop Overpaying for SAF",
     subtitle: "Why waste millions?",
     description: "Aeronomy Analytica's AI predicts price dips and locks in savings, slashing your SAF costs by 15%—that's 1.5 Million saved annually"
   },
   {
-    title: "🛡️ Crush Compliance Chaos",
+    title: "Crush Compliance Chaos",
     subtitle: "Ditch manual spreadsheets and consultants",
     description: "Generate audit-ready CORSIA/EU ETS reports in minutes, not months—saving 200+ hours/year and avoiding $500K+ in penalties"
   },
   {
-    title: "💡 Outsmart Volatility, Boost Margins",
+    title: "Outsmart Volatility, Boost Margins",
     subtitle: "SAF prices swinging wildly?",
     description: "Our dynamic feedstock optimizer and procurement calendar ensure you buy low, blend smart, and save 8–12% even in turbulent markets"
   }
 ];
 
-// Background videos for hero section
-const HERO_VIDEOS = [
-  "/videos/airplane-landing.mp4",
-  "/videos/airport-runway.mp4",
-  "/videos/aircraft-takeoff.mp4",
-  "/videos/cockpit-view.mp4",
-  "/videos/aerial-clouds.mp4"
-];
+// Background video for hero section
+const HERO_VIDEO = "/videos/clouds.mp4";
 
 interface HomeProps {
   showDemoModal?: boolean;
@@ -83,31 +77,8 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
   const isWorkflowsInView = useInView(workflowsRef, { once: true, amount: 0.2 });
   const isPlatformFeaturesInView = useInView(platformFeaturesRef, { once: true, amount: 0.2 });
   
-  // State for hero video background
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  
   // State for platform components tabs
   const [selectedPlatformTab, setSelectedPlatformTab] = useState('marketplace');
-  
-  // Video rotation for hero section
-  useEffect(() => {
-    const rotateThroughVideos = () => {
-      setCurrentVideoIndex(prevIndex => (prevIndex + 1) % HERO_VIDEOS.length);
-    };
-    
-    // Set different intervals for different videos
-    let videoInterval;
-    
-    if (currentVideoIndex === 0) {
-      // First video plays for 4 seconds
-      videoInterval = setTimeout(rotateThroughVideos, 4000);
-    } else {
-      // All other videos play for 3 seconds
-      videoInterval = setTimeout(rotateThroughVideos, 3000);
-    }
-    
-    return () => clearTimeout(videoInterval);
-  }, [currentVideoIndex, HERO_VIDEOS.length]);
   
   // State for slideshow content and progress
   const [slideshowIndex, setSlideshowIndex] = useState(0);
@@ -314,7 +285,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
       title: 'Procurement Lifecycle',
       subtitle: 'SAF Procurement Made Simple',
       icon: FiShoppingCart,
-      color: 'from-blue-500 to-cyan-500',
+      color: 'from-sky-600 to-blue-700',
       description: 'End-to-end procurement workflows inspired by enterprise P2P solutions'
     },
     {
@@ -322,7 +293,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
       title: 'Supplier Management',
       subtitle: 'Vetted SAF Network',
       icon: FiUsers,
-      color: 'from-purple-500 to-indigo-500',
+      color: 'from-sustainability to-sky-500',
       description: 'Comprehensive supplier lifecycle management and verification'
     },
     {
@@ -330,7 +301,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
       title: 'Analytics & Insights',
       subtitle: 'Data-Driven Decisions',
       icon: FiBarChart,
-      color: 'from-green-500 to-emerald-500',
+      color: 'from-sky-600 to-blue-700',
       description: 'Real-time carbon tracking and intelligent decision support'
     },
     {
@@ -338,7 +309,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
       title: 'Compliance & MRV',
       subtitle: 'Regulatory Excellence',
       icon: FiShield,
-      color: 'from-orange-500 to-red-500',
+      color: 'from-sky-700 to-blue-800',
       description: 'Automated compliance and measurement, reporting, verification'
     },
     {
@@ -346,7 +317,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
       title: 'Network & Marketplace',
       subtitle: 'Global SAF Exchange',
       icon: FiGlobe,
-      color: 'from-teal-500 to-blue-500',
+      color: 'from-sustainability to-blue-600',
       description: 'Connect with SAF suppliers worldwide through our marketplace'
     },
     {
@@ -354,7 +325,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
       title: 'User Experience',
       subtitle: 'Intuitive Platform',
       icon: FiSmartphone,
-      color: 'from-pink-500 to-purple-500',
+      color: 'from-sky-500 to-sustainability',
       description: 'Modern, role-based interfaces designed for efficiency'
     }
   ]
@@ -365,70 +336,70 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
       id: 'requisition',
       title: 'Requisition Creation',
       description: 'Internal request to procure SAF based on volume, blend level, and delivery window.',
-      icon: '📝',
+      icon: '',
       step: 1
     },
     {
       id: 'validation',
       title: 'Blending & Feedstock Validation',
       description: 'Automatic check of buyer blending requirements + feedstock preferences (e.g., used cooking oil, ethanol).',
-      icon: '🔬',
+      icon: '',
       step: 2
     },
     {
       id: 'emissions',
       title: 'Emissions Eligibility Gate',
       description: 'Apply filters for feedstock origin, lifecycle GHG data, and regional compliance (e.g., EU ETS, CORSIA).',
-      icon: '🌱',
+      icon: '',
       step: 3
     },
     {
       id: 'rfq',
       title: 'RFQ / Tender Workflow',
       description: 'Generate and send Request for Quotation to approved SAF suppliers.',
-      icon: '📋',
+      icon: '',
       step: 4
     },
     {
       id: 'evaluation',
       title: 'Quote Evaluation',
       description: 'Weighted scoring of quotes: price, carbon intensity, location, certifications.',
-      icon: '⚖️',
+      icon: '',
       step: 5
     },
     {
       id: 'contract',
       title: 'Contract Authoring',
       description: 'Digitized offtake agreement with built-in ESG clauses and volume tranches.',
-      icon: '📄',
+      icon: '',
       step: 6
     },
     {
       id: 'po',
       title: 'PO Generation',
       description: 'Auto-create and dispatch Purchase Order via platform.',
-      icon: '🛒',
+      icon: '',
       step: 7
     },
     {
       id: 'receipt',
       title: 'Goods Receipt Confirmation',
       description: 'Confirm SAF delivery (volume, quality, location) by buyer or third-party.',
-      icon: '✅',
+      icon: '',
       step: 8
     },
     {
       id: 'match',
       title: '3-Way Match Engine',
       description: 'Validate invoice against PO and confirmed emissions performance (MRV data).',
-      icon: '🔍',
+      icon: '',
       step: 9
     },
     {
       id: 'payment',
       title: 'Payment Execution',
       description: 'Sync with ERP or payment processor; notify supplier and confirm on ledger.',
-      icon: '💳',
+      icon: '',
       step: 10
     }
   ]
@@ -476,31 +447,17 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
     <div className="pt-0">
       {/* Hero Section with Video Background */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Video backgrounds with crossfade effect */}
-        {HERO_VIDEOS.map((videoSrc, index) => (
-          <motion.div
-            key={videoSrc}
-            className="absolute inset-0 w-full h-full"
-            initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: currentVideoIndex === index ? 1 : 0,
-              zIndex: currentVideoIndex === index ? 1 : 0
-            }}
-            transition={{ duration: 1 }}
-          >
-            <video
-              className="absolute inset-0 w-full h-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-              src={videoSrc}
-            >
-              <source src={videoSrc} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </motion.div>
-        ))}
+        {/* Single video background */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src={HERO_VIDEO} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black/50 z-10"></div>
@@ -512,12 +469,12 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
             transition={{ duration: 0.8 }}
             className="max-w-2xl"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight text-white">
-              <span className="text-sustainability">Optimize SAF Procurement.</span> Reduce Risk, Unlock ESG
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight text-white">
+              The only SAF platform you will ever need.
             </h1>
 
-            <p className="text-xl mb-8 text-white/90">
-              Aeronomy's predictive analytics and dynamic hedging tools slash SAF costs by 15–20% while securing scalable supply for net-zero goals.
+            <p className="text-4xl md:text-6xl mb-8 text-white font-bold leading-tight">
+              That's <span className="text-white">Aero</span><span className="text-sustainability">nomy</span>.
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
               <motion.button
@@ -533,133 +490,20 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
         </div>
       </section>
 
-      {/* SAF Funding Gap Section */}
-      <section className="py-20 md:py-32 relative overflow-hidden">
-        {/* Background image and overlay */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="/images/world.jpg" 
-            alt="Global Supply Chain" 
-            className="w-full h-full object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy/95 via-navy/90 to-navy/95"></div>
-        </div>
-        
-        {/* Decorative elements */}
-        <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-blue-500/10 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-indigo-500/10 rounded-full filter blur-3xl"></div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-5xl mx-auto">
-            {/* Section Title */}
-            <div className="text-center mb-16">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                className="text-4xl md:text-5xl font-bold mb-6 text-white"
-              >
-                The $300B SAF Funding Gap Won't Close Itself
-              </motion.h2>
-              
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-                className="text-lg text-white/80 max-w-3xl mx-auto"
-              >
-                Sustainable Aviation Fuel is the cornerstone of aviation's path to net-zero, but significant challenges 
-                stand in the way.
-              </motion.p>
-            </div>
-            
-            {/* Challenge Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16">
-              {/* Compliance Chaos */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -10, boxShadow: "0 10px 40px rgba(79, 70, 229, 0.2)" }}
-                className="bg-white/10 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 overflow-hidden p-8"
-              >
-                <div className="w-16 h-16 bg-indigo-900/30 rounded-full flex items-center justify-center mb-6">
-                  <svg className="w-8 h-8 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Compliance Chaos</h3>
-                <p className="text-white/80 mb-3">
-                  Airlines face 50+ global mandates. Manual reporting wastes 100+ hours/month in redundant workflows and 
-                  error-prone spreadsheets.
-                </p>
-              </motion.div>
-              
-              {/* Price Volatility */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -10, boxShadow: "0 10px 40px rgba(245, 158, 11, 0.2)" }}
-                className="bg-white/10 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 overflow-hidden p-8"
-              >
-                <div className="w-16 h-16 bg-yellow-800/30 rounded-full flex items-center justify-center mb-6">
-                  <svg className="w-8 h-8 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Price Volatility</h3>
-                <p className="text-white/80 mb-3">
-                  SAF costs 2-3x conventional fuel. Budgets are unpredictable and procurement strategies lack 
-                  sophistication in an emerging market.
-                </p>
-              </motion.div>
-              
-              {/* Fragmented Financing */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -10, boxShadow: "0 10px 40px rgba(37, 99, 235, 0.2)" }}
-                className="bg-white/10 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 overflow-hidden p-8"
-              >
-                <div className="w-16 h-16 bg-blue-900/30 rounded-full flex items-center justify-center mb-6">
-                  <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"></path>
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Fragmented Financing</h3>
-                <p className="text-white/80 mb-3">
-                  Producers struggle to secure capital. Investors lack transparent pipelines and standardized mechanisms 
-                  to support sustainable aviation initiatives.
-                </p>
-              </motion.div>
-            </div>
-            
-            {/* Solution Banner */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="bg-sustainability/20 backdrop-blur-md py-8 px-10 rounded-2xl text-center border border-sustainability/30 shadow-lg"
-            >
-              <h3 className="text-xl md:text-2xl font-semibold text-white">
-                Aeronomy unifies compliance, procurement, and funding in one platform.
-              </h3>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       {/* Player-specific Solutions Section */}
       <section className="py-20 bg-white relative overflow-hidden">
-        <div className="container mx-auto px-4">
+        {/* Grid pattern background */}
+        <div 
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(10, 35, 66, 1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(10, 35, 66, 1) 1px, transparent 1px)
+            `,
+            backgroundSize: '40px 40px'
+          }}
+        />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto text-center mb-12">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -1169,6 +1013,17 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
 
       {/* Platform Components Section - Modern & Minimalist */}
       <section className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+        {/* Grid pattern background */}
+        <div 
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(10, 35, 66, 1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(10, 35, 66, 1) 1px, transparent 1px)
+            `,
+            backgroundSize: '40px 40px'
+          }}
+        />
         {/* Background decoration */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-sustainability/5 rounded-full filter blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-navy/5 rounded-full filter blur-3xl"></div>
@@ -1302,7 +1157,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                   </div>
                 </div>
                 
-                <div className="bg-gradient-to-br from-navy to-navy-dark p-8 rounded-2xl text-white">
+                <div className="bg-gradient-to-br from-sky-600 to-blue-700 p-8 rounded-2xl text-white">
                   <div className="flex items-center justify-between mb-6">
                     <h4 className="text-xl font-semibold">Marketplace Dashboard</h4>
                     <div className="bg-sustainability px-3 py-1 rounded-full text-xs font-medium">LIVE</div>
@@ -1374,7 +1229,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                   </div>
                 </div>
                 
-                <div className="bg-gradient-to-br from-green-500 to-sustainability p-8 rounded-2xl text-white">
+                <div className="bg-gradient-to-br from-sky-600 to-blue-700 p-8 rounded-2xl text-white">
                   <div className="flex items-center justify-between mb-6">
                     <h4 className="text-xl font-semibold">Compliance Status</h4>
                     <div className="bg-white/20 px-3 py-1 rounded-full text-xs font-medium">AUTOMATED</div>
@@ -1445,7 +1300,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                   </div>
                 </div>
                 
-                <div className="bg-gradient-to-br from-purple-600 to-purple-800 p-8 rounded-2xl text-white">
+                <div className="bg-gradient-to-br from-sky-600 to-blue-700 p-8 rounded-2xl text-white">
                   <div className="flex items-center justify-between mb-6">
                     <h4 className="text-xl font-semibold">Financial Portfolio</h4>
                     <div className="bg-white/20 px-3 py-1 rounded-full text-xs font-medium">OPTIMIZED</div>
@@ -1466,7 +1321,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                     <div className="bg-white/10 p-4 rounded-lg">
                       <div className="flex justify-between items-center">
                         <span className="text-white/80">Cost Reduction</span>
-                        <span className="text-xl font-bold text-green-300">-12%</span>
+                        <span className="text-xl font-bold text-sustainability">-12%</span>
                       </div>
                     </div>
                   </div>
@@ -1492,8 +1347,8 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
-                      <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-4">
-                        <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-12 h-12 bg-sustainability/10 rounded-lg flex items-center justify-center mb-4">
+                    <svg className="w-6 h-6 text-sustainability" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                         </svg>
                       </div>
@@ -1502,8 +1357,8 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                     </div>
                     
                     <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
-                      <div className="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center mb-4">
-                        <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-12 h-12 bg-sustainability/10 rounded-lg flex items-center justify-center mb-4">
+                    <svg className="w-6 h-6 text-sustainability" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                         </svg>
                       </div>
@@ -1513,7 +1368,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                   </div>
                 </div>
                 
-                <div className="bg-gradient-to-br from-blue-600 to-indigo-700 p-8 rounded-2xl text-white">
+                <div className="bg-gradient-to-br from-sky-600 to-blue-700 p-8 rounded-2xl text-white">
                   <div className="flex items-center justify-between mb-6">
                     <h4 className="text-xl font-semibold">Analytics Dashboard</h4>
                     <div className="bg-white/20 px-3 py-1 rounded-full text-xs font-medium">AI-POWERED</div>
@@ -1526,7 +1381,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                         <span className="text-white font-semibold">95%</span>
                       </div>
                       <div className="w-full bg-white/20 rounded-full h-2">
-                        <div className="bg-green-400 h-2 rounded-full" style={{width: '95%'}}></div>
+                        <div className="bg-sustainability h-2 rounded-full" style={{width: '95%'}}></div>
                       </div>
                     </div>
                     
@@ -1548,21 +1403,27 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
         </div>
       </section>
 
-      {/* Enhanced Features Hero Section */}
+      {/* Next-Generation SAF Workflows - Light Design */}
       <section 
-      id = "features"
+        id="features"
         ref={insightsRef}
-        className="relative py-20 md:py-32 overflow-hidden"
-        style={{
-          backgroundImage: "linear-gradient(135deg, #0A2342 0%, #00A0DC 50%, #4CAF50 100%)"
-        }}
+        className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-br from-gray-50 to-white"
       >
-        <div className="absolute inset-0 bg-black/20"></div>
-        
-        {/* Animated background elements */}
+        {/* Grid pattern background */}
+        <div 
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(10, 35, 66, 1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(10, 35, 66, 1) 1px, transparent 1px)
+            `,
+            backgroundSize: '40px 40px'
+          }}
+        />
+        {/* Subtle decorative shapes */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-sustainability/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-10 -right-16 w-80 h-80 bg-sustainability/10 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-14 -left-24 w-96 h-96 bg-sky-200/30 rounded-full blur-3xl"></div>
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -1576,20 +1437,20 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
               initial={{ scale: 0 }}
               animate={isInsightsInView ? { scale: 1 } : { scale: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-8"
+              className="inline-flex items-center bg-sustainability/10 rounded-full px-6 py-3 mb-8 border border-sustainability/20"
             >
-              <FiLayers className="mr-2 text-white" />
-              <span className="text-white font-medium">Enterprise-Grade SAF Procurement Platform</span>
+              <FiLayers className="mr-2 text-sustainability" />
+              <span className="text-navy font-medium">Enterprise-Grade SAF Procurement Platform</span>
             </motion.div>
 
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-navy">
               Next-Generation{' '}
-              <span className="bg-gradient-to-r from-sustainability to-blue-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-sustainability to-sky-500 bg-clip-text text-transparent">
                 SAF Workflows
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
               Comprehensive procurement lifecycle management inspired by enterprise solutions,
               <br className="hidden md:block" />
               designed specifically for sustainable aviation fuel sourcing.
@@ -1604,14 +1465,14 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-navy px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-colors shadow-xl"
+                className="btn-primary"
               >
                 Explore Workflows
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white/10 backdrop-blur-sm text-white border border-white/30 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition-colors"
+                className="btn-secondary"
               >
                 Watch Demo
               </motion.button>
@@ -1620,9 +1481,20 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
         </div>
       </section>
 
-      {/* Feature Sections Navigation */}
-      <section className="py-16 bg-white dark:bg-dark-bg">
-        <div className="container mx-auto px-4">
+      {/* Platform Capabilities - Minimalist White Design */}
+      <section className="py-16 bg-white dark:bg-dark-bg relative overflow-hidden">
+        {/* Grid pattern background */}
+        <div 
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(10, 35, 66, 1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(10, 35, 66, 1) 1px, transparent 1px)
+            `,
+            backgroundSize: '40px 40px'
+          }}
+        />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-navy dark:text-white mb-4">
               Platform Capabilities
@@ -1632,7 +1504,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {featureSections.map((section, index) => {
               const IconComponent = section.icon
               return (
@@ -1642,19 +1514,19 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ y: -5 }}
-                  className={`relative p-8 rounded-2xl bg-gradient-to-br ${section.color} cursor-pointer group overflow-hidden`}
+                  whileHover={{ y: -5, borderColor: 'rgba(0, 160, 220, 0.5)' }}
+                  className="relative p-8 rounded-xl bg-white border-2 border-gray-100 cursor-pointer group transition-all hover:shadow-lg"
                   onClick={() => setActiveSection(index)}
                 >
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors"></div>
-                  <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-4">
-                      <IconComponent className="w-8 h-8 text-white" />
-                      <FiArrowRight className="w-5 h-5 text-white/70 group-hover:text-white group-hover:translate-x-1 transition-all" />
-                    </div>
-                    <h3 className="text-xl font-bold text-white mb-2">{section.title}</h3>
-                    <p className="text-sm text-white/80 mb-3">{section.subtitle}</p>
-                    <p className="text-sm text-white/70">{section.description}</p>
+                  <div className="mb-4">
+                    <IconComponent className="w-8 h-8 text-sustainability" />
+                  </div>
+                  <h3 className="text-lg font-bold text-navy mb-2">{section.title}</h3>
+                  <p className="text-sm text-gray-500 mb-3">{section.subtitle}</p>
+                  <p className="text-sm text-gray-600 leading-relaxed">{section.description}</p>
+                  <div className="mt-4 flex items-center text-sustainability text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span>Learn more</span>
+                    <FiArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </motion.div>
               )
@@ -1663,9 +1535,21 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
         </div>
       </section>
 
-      {/* Procurement Workflows Detail */}
-      <section ref={workflowsRef} className="py-20 bg-gray-50 dark:bg-dark-surface">
-        <div className="container mx-auto px-4">
+      {/* Procurement Lifecycle Workflows - Modern Roadmap Design */}
+      <section ref={workflowsRef} className="py-20 bg-white dark:bg-dark-surface relative overflow-hidden">
+        {/* Grid pattern background */}
+        <div 
+          className="absolute inset-0 opacity-[0.08]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(10, 35, 66, 1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(10, 35, 66, 1) 1px, transparent 1px)
+            `,
+            backgroundSize: '40px 40px'
+          }}
+        />
+        
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isWorkflowsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -1673,7 +1557,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-navy dark:text-white mb-4">
-              🛠 Procurement Lifecycle Workflows
+              Procurement Lifecycle Workflows
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto">
               Comprehensive P2P (Procure-to-Pay) workflows designed specifically for SAF procurement,
@@ -1681,58 +1565,80 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {procurementWorkflows.map((workflow, index) => (
-              <motion.div
-                key={workflow.id}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                animate={isWorkflowsInView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`p-6 bg-white dark:bg-dark-card rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer border-l-4 border-sustainability ${
-                  expandedWorkflow === workflow.id ? 'ring-2 ring-sustainability/20' : ''
-                }`}
-                onClick={() => setExpandedWorkflow(expandedWorkflow === workflow.id ? null : workflow.id)}
-              >
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-sustainability/10 rounded-lg flex items-center justify-center text-2xl">
-                      {workflow.icon}
-                    </div>
-                    <div className="w-8 h-8 bg-sustainability rounded-full flex items-center justify-center text-white text-sm font-bold mt-2 mx-2">
-                      {workflow.step}
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-bold text-navy dark:text-white mb-2">
-                      {workflow.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                      {workflow.description}
-                    </p>
-                    {expandedWorkflow === workflow.id && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"
-                      >
-                        <div className="flex items-center text-sustainability text-sm">
-                          <FiCheck className="mr-2" />
-                          <span>Automated workflow with real-time tracking</span>
+          {/* Roadmap visualization */}
+          <div className="max-w-5xl mx-auto">
+            <div className="relative">
+              {/* Connecting line for roadmap */}
+              <div className="hidden md:block absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-sustainability/50 via-sustainability/30 to-sustainability/50" />
+              
+              <div className="space-y-8">
+                {procurementWorkflows.map((workflow, index) => (
+                  <motion.div
+                    key={workflow.id}
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={isWorkflowsInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                    transition={{ duration: 0.6, delay: index * 0.08 }}
+                    className="relative"
+                  >
+                    <div className="flex items-start gap-6">
+                      {/* Step number circle */}
+                      <div className="flex-shrink-0 relative z-10">
+                        <div className="w-16 h-16 rounded-full bg-white border-4 border-sustainability flex items-center justify-center shadow-lg">
+                          <span className="text-2xl font-bold text-sustainability">{workflow.step}</span>
                         </div>
+                      </div>
+                      
+                      {/* Content card */}
+                      <motion.div
+                        whileHover={{ scale: 1.02, boxShadow: '0 10px 25px rgba(0, 160, 220, 0.15)' }}
+                        className="flex-1 bg-white border border-gray-200 rounded-xl p-6 shadow-sm transition-all cursor-pointer"
+                        onClick={() => setExpandedWorkflow(expandedWorkflow === workflow.id ? null : workflow.id)}
+                      >
+                        <h3 className="text-lg font-bold text-navy mb-2">
+                          {workflow.title}
+                        </h3>
+                        <p className="text-gray-600 text-sm leading-relaxed">
+                          {workflow.description}
+                        </p>
+                        
+                        {expandedWorkflow === workflow.id && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="mt-4 pt-4 border-t border-gray-200"
+                          >
+                            <div className="flex items-center text-sustainability text-sm">
+                              <FiCheck className="mr-2" />
+                              <span>Automated workflow with real-time tracking</span>
+                            </div>
+                          </motion.div>
+                        )}
                       </motion.div>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Feature Categories */}
-      <section ref={platformFeaturesRef} className="py-20 bg-white dark:bg-dark-bg">
-        <div className="container mx-auto px-4">
+      {/* Advanced Platform Features - Minimalist Design */}
+      <section ref={platformFeaturesRef} className="py-20 bg-gray-50 dark:bg-dark-bg relative overflow-hidden">
+        {/* Subtle grid pattern */}
+        <div 
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(10, 35, 66, 1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(10, 35, 66, 1) 1px, transparent 1px)
+            `,
+            backgroundSize: '40px 40px'
+          }}
+        />
+        
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isPlatformFeaturesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -1747,7 +1653,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
             </p>
           </motion.div>
 
-          <div className="space-y-16">
+          <div className="space-y-16 max-w-6xl mx-auto">
             {Object.entries(featureCategories).map(([category, features], categoryIndex) => {
               const section = featureSections.find(s => s.id === category)
               if (!section) return null
@@ -1759,34 +1665,34 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                   key={category}
                   initial={{ opacity: 0, y: 50 }}
                   animate={isPlatformFeaturesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                  transition={{ duration: 0.8, delay: categoryIndex * 0.2 }}
-                  className="bg-gray-50 dark:bg-dark-surface rounded-2xl p-8"
+                  transition={{ duration: 0.8, delay: categoryIndex * 0.15 }}
+                  className="bg-white dark:bg-dark-surface rounded-xl border border-gray-200 p-8"
                 >
-                  <div className="flex items-center mb-8">
-                    <div className={`p-4 rounded-xl bg-gradient-to-br ${section.color} mr-4`}>
-                      <IconComponent className="w-8 h-8 text-white" />
+                  <div className="flex items-center mb-8 pb-6 border-b border-gray-100">
+                    <div className="p-3 rounded-lg bg-sustainability/10 mr-4">
+                      <IconComponent className="w-7 h-7 text-sustainability" />
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold text-navy dark:text-white">{section.title}</h3>
-                      <p className="text-gray-600 dark:text-gray-300">{section.description}</p>
+                      <p className="text-gray-600 dark:text-gray-300 text-sm">{section.description}</p>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     {features.map((feature, featureIndex) => (
                       <motion.div
                         key={featureIndex}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={isPlatformFeaturesInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-                        transition={{ duration: 0.6, delay: (categoryIndex * 0.2) + (featureIndex * 0.1) }}
-                        whileHover={{ y: -5 }}
-                        className="bg-white dark:bg-dark-card p-6 rounded-xl shadow-md hover:shadow-lg transition-all"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={isPlatformFeaturesInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.5, delay: (categoryIndex * 0.15) + (featureIndex * 0.05) }}
+                        whileHover={{ y: -3 }}
+                        className="bg-white dark:bg-dark-card p-5 rounded-lg border border-gray-100 hover:border-sustainability/30 hover:shadow-md transition-all"
                       >
                         <div className="flex items-start space-x-3">
-                          <div className="w-2 h-2 bg-sustainability rounded-full mt-2 flex-shrink-0"></div>
+                          <div className="w-1.5 h-1.5 bg-sustainability rounded-full mt-2 flex-shrink-0"></div>
                           <div>
-                            <h4 className="font-semibold text-navy dark:text-white mb-2">{feature.title}</h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-300">{feature.desc}</p>
+                            <h4 className="font-semibold text-navy dark:text-white mb-1.5 text-sm">{feature.title}</h4>
+                            <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{feature.desc}</p>
                           </div>
                         </div>
                       </motion.div>
@@ -1838,37 +1744,42 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
         </div>
       </section>
 
-      {/* Enhanced CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-navy to-sustainability">
-        <div className="container mx-auto px-4 text-center">
+      {/* Enhanced CTA Section - Clean White Design */}
+      <section className="py-20 bg-white relative overflow-hidden">
+        {/* Grid pattern background */}
+        <div 
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(10, 35, 66, 1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(10, 35, 66, 1) 1px, transparent 1px)
+            `,
+            backgroundSize: '40px 40px'
+          }}
+        />
+        <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-6">
               Ready to Transform Your SAF Procurement?
             </h2>
-            <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
               Join leading airlines already using Aeronomy's platform to streamline their 
               sustainable aviation fuel sourcing and compliance workflows.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex justify-center">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-navy px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-colors shadow-xl"
+                className="bg-sustainability text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-sustainability/90 transition-colors shadow-lg"
                 onClick={() => toggleModal(true)}
               >
                 Request Demo
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white/10 backdrop-blur-sm text-white border border-white/30 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition-colors"
-              >
-                View Pricing
               </motion.button>
             </div>
           </motion.div>

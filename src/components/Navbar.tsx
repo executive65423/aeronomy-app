@@ -1,10 +1,65 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 interface NavbarProps {
   onRequestDemo: () => void;
 }
+
+// Navigation items configuration
+const NAV_ITEMS = [
+  { label: 'Features', href: '#features', isAnchor: true },
+  { label: 'View Solutions', href: '/solutions' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Resources', href: '/resources' }
+];
+
+// Product dropdown items
+const PRODUCTS = [
+  {
+    id: 'analytica',
+    name: 'Aeronomics Analytica',
+    description: 'AI-powered analytics',
+    href: '/products/analytica',
+    icon: 'chart'
+  },
+  {
+    id: 'safpro',
+    name: 'SAF-PRO',
+    description: 'Procurement & risk management',
+    href: '/products/safpro',
+    icon: 'shield'
+  },
+  {
+    id: 'safsuite',
+    name: 'SAF Enterprise',
+    description: 'Enterprise solutions',
+    href: '/products/safsuite',
+    icon: 'building'
+  }
+];
+
+// Icon component for products
+const ProductIcon = ({ type }: { type: string }) => {
+  const icons = {
+    chart: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+    ),
+    shield: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+      </svg>
+    ),
+    building: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    )
+  };
+  return icons[type] || icons.chart;
+};
 
 const Navbar = ({ onRequestDemo }: NavbarProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -71,20 +126,27 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
     }
   };
 
-  // Use transparent navbar only on homepage, use semi-transparent background on other pages
-  const navbarBackground = 
-    isScrolled 
-      ? 'bg-white/90 dark:bg-dark-surface/90 backdrop-blur-sm shadow-sm'
-      : isHomePage 
-        ? 'bg-transparent' 
-        : 'bg-white/80 dark:bg-dark-surface/80 backdrop-blur-sm shadow-sm';
-
-  // Determine text color based on page and scroll state  
-  const textStyle = (isHomePage && !isScrolled) ? 'text-white' : 'text-navy dark:text-white';
-  // Always use text-white for "Aero" by setting logo style to a custom class
-  const logoStyle = 'custom-logo';
-  const linkStyle = (isHomePage && !isScrolled) ? 'nav-transparent' : 'nav-scrolled';
-  const buttonStyle = (isHomePage && !isScrolled) ? 'bg-white/20 backdrop-blur-sm hover:bg-white/30 border border-white/30' : '';
+  // Dynamic island styling - shrinks horizontally when scrolled
+  const navbarWidth = isScrolled ? 'max-w-6xl' : 'w-[90%] max-w-[1400px]';
+  const navbarPadding = isScrolled ? 'px-8 py-2.5' : 'px-12 py-4';
+  const navbarRounded = 'rounded-full';
+  const navbarShadow = isScrolled ? 'shadow-lg' : 'shadow-2xl';
+  const navbarBackground = 'bg-white/90 backdrop-blur-2xl border border-slate-200';
+  
+  // Unified dark blue scheme + white text
+  const textStyle = 'text-navy';
+  const logoStyle = 'dynamic-island-logo';
+  const linkStyle = 'nav-island text-navy/90 hover:text-navy px-2 whitespace-nowrap';
+  const buttonStyle = 'bg-navy hover:bg-navy-dark text-white border border-navy';
+  
+  // Font size adjustments for logo when scrolled
+  const logoSize = isScrolled ? 'text-xl' : 'text-2xl';
+  
+  // Button size adjustments when scrolled
+  const buttonSize = isScrolled ? 'px-4 py-2 text-sm' : 'px-6 py-3 text-base';
+  
+  // Link size adjustments when scrolled
+  const linkSize = isScrolled ? 'text-sm' : 'text-base';
 
   // Handle login/dashboard click
   const handleLoginClick = (e: React.MouseEvent) => {
@@ -101,118 +163,41 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
   };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${navbarBackground}`}>
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-20">
+    <nav className="fixed w-full z-50 flex justify-center pt-4 px-4 transition-all duration-500">
+      <div className={`${navbarWidth} ${navbarPadding} ${navbarRounded} ${navbarShadow} ${navbarBackground} transition-all duration-500 ease-in-out`}>
+        <div className="flex justify-between items-center gap-x-4 md:gap-x-6">
           <Link to="/" className="flex items-center">
-            <span className={`text-2xl font-bold navbar-logo ${logoStyle}`}>
-              <span className="text-white">Aero</span>
+            <span className={`${logoSize} font-bold navbar-logo ${logoStyle} transition-all duration-500`}>
+              <span className="text-navy">Aero</span>
               <span className="text-sustainability">nomy</span>
             </span>
           </Link>
           
-          <div className="hidden md:flex items-center space-x-8">
-            {/* Products Dropdown */}
-            <div 
-              className="relative group" 
-              ref={dropdownRef}
-              onMouseEnter={() => setProductsDropdownOpen(true)}
-              onMouseLeave={() => {
-                // Add delay before closing dropdown
-                setTimeout(() => {
-                  setProductsDropdownOpen(false);
-                }, 300);
-              }}
-            >
-              <button className={`flex items-center ${linkStyle}`}>
-                Products
-                <svg 
-                  className={`ml-2 w-4 h-4 transition-transform ${productsDropdownOpen ? 'rotate-180' : ''}`} 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
+          <div className={`hidden md:flex items-center transition-all duration-500 ${isScrolled ? 'gap-x-6' : 'gap-x-10'} whitespace-nowrap`}>
+            {NAV_ITEMS.map((item) => (
+              item.isAnchor ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={scrollToFeatures}
+                  className={`${linkStyle} ${linkSize} transition-all duration-500`}
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              
-              <div className={`absolute left-0 mt-2 w-80 bg-white/95 dark:bg-dark-surface/95 rounded-lg shadow-xl py-3 z-50 transition-all duration-300 ease-in-out backdrop-blur-md border border-gray-200 dark:border-gray-700 ${productsDropdownOpen ? 'opacity-100 translate-y-0' : 'opacity-0 pointer-events-none -translate-y-4'}`}>
-                <Link 
-                  to="/products/analytica" 
-                  className="block px-6 py-3 hover:bg-gray-100/80 dark:hover:bg-dark-bg/80 transition-colors rounded-md mx-2"
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  className={`${linkStyle} ${linkSize} transition-all duration-300`}
                 >
-                  <div className="flex items-center">
-                    <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg mr-3">
-                      <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <div className="font-medium text-navy dark:text-white">Aeronomics Analytica</div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">AI-powered price forecasting & analytics</div>
-                    </div>
-                  </div>
+                  {item.label}
                 </Link>
-                <Link 
-                  to="/products/safpro" 
-                  className="block px-6 py-3 hover:bg-gray-100/80 dark:hover:bg-dark-bg/80 transition-colors rounded-md mx-2 mt-1"
-                >
-                  <div className="flex items-center">
-                    <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg mr-3">
-                      <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <div className="font-medium text-navy dark:text-white">SAF-PRO Platform</div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">Procurement & risk management solutions</div>
-                    </div>
-                  </div>
-                </Link>
-                <Link 
-                  to="/products/safsuite" 
-                  className="block px-6 py-3 hover:bg-gray-100/80 dark:hover:bg-dark-bg/80 transition-colors rounded-md mx-2 mt-1"
-                >
-                  <div className="flex items-center">
-                    <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg mr-3">
-                      <svg className="w-5 h-5 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                      </svg>
-                    </div>
-                    <div>
-                      <div className="font-medium text-navy dark:text-white">SAF-Suite Enterprise</div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">End-to-end decarbonization infrastructure</div>
-                    </div>
-                  </div>
-                </Link>
-                <div className="border-t border-gray-200 dark:border-gray-700 my-2"></div>
-                <Link 
-                  to="/products" 
-                  className="block px-6 py-3 hover:bg-gray-100/80 dark:hover:bg-dark-bg/80 transition-colors rounded-md mx-2"
-                >
-                  <div className="font-medium text-sustainability flex items-center">
-                    View All Products
-                    <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </div>
-                </Link>
-              </div>
-            </div>
-            
-            <a href="#features" onClick={scrollToFeatures} className={linkStyle}>
-              Features
-            </a>
-            <Link to="/about" className={linkStyle}>
-              About Us
-            </Link>
-            <Link to="/resources" className={linkStyle}>
-              Resources
-            </Link>
+              )
+            ))}
           </div>
 
-          <div className="hidden md:flex items-center space-x-4">
-            <a href="#" onClick={handleLoginClick} className={linkStyle}>
+          <div className={`hidden md:flex items-center transition-all duration-500 ${isScrolled ? 'gap-x-5' : 'gap-x-7'} md:ml-4 md:pl-4 md:border-l md:border-slate-200`}>
+            <a href="#" onClick={handleLoginClick} className={`${linkStyle} ${linkSize} transition-all duration-500`}>
               {isLoggedIn ? 'Dashboard' : 'Login'}
             </a>
             <motion.div
@@ -221,7 +206,7 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
             >
               <button 
                 onClick={onRequestDemo} 
-                className={`btn-primary ${buttonStyle}`}
+                className={`${buttonSize} ${buttonStyle} rounded-full font-semibold transition-all duration-500 shadow-md hover:shadow-lg`}
               >
                 Request Demo
               </button>
@@ -248,61 +233,32 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
       
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white/95 dark:bg-dark-surface/95 backdrop-blur-sm pb-4 px-4">
+        <div className="md:hidden bg-gradient-to-br from-sky-100/95 to-blue-50/95 backdrop-blur-xl rounded-3xl mt-4 mx-4 shadow-2xl border border-sky-200 pb-4 px-4">
           <div className="flex flex-col space-y-4 pt-2 pb-3">
-            {/* Products submenu for mobile */}
-            <div className="border-l-4 border-sustainability pl-3">
-              <div className="text-navy dark:text-dark-text font-medium mb-2">Products</div>
-              <Link to="/products/analytica" 
-                className="block text-sm text-navy hover:text-sustainability py-1 dark:text-dark-text"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Aeronomics Analytica
-              </Link>
-              <Link to="/products/safpro" 
-                className="block text-sm text-navy hover:text-sustainability py-1 dark:text-dark-text"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                SAF-PRO Platform
-              </Link>
-              <Link to="/products/safsuite" 
-                className="block text-sm text-navy hover:text-sustainability py-1 dark:text-dark-text"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                SAF-Suite Enterprise
-              </Link>
-              <Link to="/products" 
-                className="block text-sm text-sustainability font-medium py-1"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                View All Products →
-              </Link>
-            </div>
-            
-            <a 
-              href="#features" 
-              onClick={(e) => {
-                scrollToFeatures(e);
-                setMobileMenuOpen(false);
-              }}
-              className="block text-navy hover:text-sustainability py-2 border-b border-gray-200 dark:text-dark-text dark:border-gray-700"
-            >
-              Features
-            </a>
-            <Link 
-              to="/about" 
-              className="block text-navy hover:text-sustainability py-2 border-b border-gray-200 dark:text-dark-text dark:border-gray-700"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              About Us
-            </Link>
-            <Link 
-              to="/resources" 
-              className="block text-navy hover:text-sustainability py-2 border-b border-gray-200 dark:text-dark-text dark:border-gray-700"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Resources
-            </Link>
+            {NAV_ITEMS.map((item) => (
+              item.isAnchor ? (
+                <a 
+                  key={item.label}
+                  href={item.href} 
+                  onClick={(e) => {
+                    scrollToFeatures(e);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="block text-navy hover:text-sky-600 py-2 border-b border-sky-100"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link 
+                  key={item.label}
+                  to={item.href} 
+                  className="block text-navy hover:text-sky-600 py-2 border-b border-sky-100"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              )
+            ))}
             
             <div className="pt-2">
               <div className="flex flex-col space-y-3">
@@ -312,7 +268,7 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
                     handleLoginClick(e);
                     setMobileMenuOpen(false);
                   }}
-                  className="block text-navy hover:text-sustainability py-2 text-center border border-gray-200 rounded-lg dark:text-dark-text dark:border-gray-700"
+                  className="block text-navy hover:text-sky-600 py-2 text-center border border-sky-200 rounded-xl"
                 >
                   {isLoggedIn ? 'Dashboard' : 'Login'}
                 </a>
@@ -321,7 +277,7 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
                     onRequestDemo();
                     setMobileMenuOpen(false);
                   }}
-                  className="btn-primary w-full"
+                  className="bg-gradient-to-r from-sky-400 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-white px-6 py-3 rounded-xl font-semibold transition-all w-full"
                 >
                   Request Demo
                 </button>
