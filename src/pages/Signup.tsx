@@ -104,37 +104,56 @@ const Signup = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center py-12">
-      {/* Background image with overlay */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="/images/evening.jpg" 
-          alt="Evening sky" 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/80 to-navy/60"></div>
-      </div>
+    <div className="relative min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
+      {/* Grid pattern background */}
+      <div 
+        className="absolute inset-0 opacity-[0.06]"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(10, 35, 66, 1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(10, 35, 66, 1) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px'
+        }}
+      />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-2xl px-6">
+      <div className="relative z-10 w-full max-w-2xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white/20 dark:bg-dark-card/30 backdrop-blur-lg rounded-xl p-8 shadow-xl"
+          transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-bold text-white mb-6 text-center">Create Your Account</h2>
+          {/* Logo/Brand */}
+          <div className="text-center mb-8">
+            <Link to="/" className="inline-block">
+              <h1 className="text-4xl font-bold">
+                <span className="text-navy">Aero</span>
+                <span className="text-sustainability">nomy</span>
+              </h1>
+            </Link>
+            <p className="mt-2 text-gray-600">Create your account to get started</p>
+          </div>
+
+          {/* Signup Card */}
+          <div className="bg-white rounded-xl border-2 border-gray-200 p-8 shadow-lg">
+            <h2 className="text-2xl font-bold text-navy mb-6">Create Your Account</h2>
           
           {serverError && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6"
+            >
               {serverError}
-            </div>
+            </motion.div>
           )}
           
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {/* Full Name */}
               <div>
-                <label htmlFor="fullName" className="block text-white font-medium mb-2">
+                <label htmlFor="fullName" className="block text-navy font-medium mb-2">
                   Full Name
                 </label>
                 <input
@@ -143,20 +162,20 @@ const Signup = () => {
                   type="text"
                   value={formData.fullName}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 rounded-lg bg-white/30 backdrop-blur-sm border ${
-                    errors.fullName ? 'border-red-500' : 'border-white/20'
-                  } focus:border-sustainability focus:ring-1 focus:ring-sustainability text-white placeholder-white/70`}
+                  className={`w-full px-4 py-3 rounded-lg border-2 ${
+                    errors.fullName ? 'border-red-500' : 'border-gray-200'
+                  } focus:border-sustainability focus:ring-2 focus:ring-sustainability/20 text-navy placeholder-gray-400 transition-colors`}
                   placeholder="Enter your full name"
                 />
                 {errors.fullName && (
-                  <p className="mt-1 text-red-300 text-sm">{errors.fullName}</p>
+                  <p className="mt-1 text-red-600 text-sm">{errors.fullName}</p>
                 )}
               </div>
               
               {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-white font-medium mb-2">
-                  Email ID
+                <label htmlFor="email" className="block text-navy font-medium mb-2">
+                  Email Address
                 </label>
                 <input
                   id="email"
@@ -164,19 +183,19 @@ const Signup = () => {
                   type="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 rounded-lg bg-white/30 backdrop-blur-sm border ${
-                    errors.email ? 'border-red-500' : 'border-white/20'
-                  } focus:border-sustainability focus:ring-1 focus:ring-sustainability text-white placeholder-white/70`}
+                  className={`w-full px-4 py-3 rounded-lg border-2 ${
+                    errors.email ? 'border-red-500' : 'border-gray-200'
+                  } focus:border-sustainability focus:ring-2 focus:ring-sustainability/20 text-navy placeholder-gray-400 transition-colors`}
                   placeholder="you@example.com"
                 />
                 {errors.email && (
-                  <p className="mt-1 text-red-300 text-sm">{errors.email}</p>
+                  <p className="mt-1 text-red-600 text-sm">{errors.email}</p>
                 )}
               </div>
               
               {/* Organization Name */}
               <div>
-                <label htmlFor="organizationName" className="block text-white font-medium mb-2">
+                <label htmlFor="organizationName" className="block text-navy font-medium mb-2">
                   Organization Name
                 </label>
                 <input
@@ -185,19 +204,19 @@ const Signup = () => {
                   type="text"
                   value={formData.organizationName}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 rounded-lg bg-white/30 backdrop-blur-sm border ${
-                    errors.organizationName ? 'border-red-500' : 'border-white/20'
-                  } focus:border-sustainability focus:ring-1 focus:ring-sustainability text-white placeholder-white/70`}
+                  className={`w-full px-4 py-3 rounded-lg border-2 ${
+                    errors.organizationName ? 'border-red-500' : 'border-gray-200'
+                  } focus:border-sustainability focus:ring-2 focus:ring-sustainability/20 text-navy placeholder-gray-400 transition-colors`}
                   placeholder="Enter your organization name"
                 />
                 {errors.organizationName && (
-                  <p className="mt-1 text-red-300 text-sm">{errors.organizationName}</p>
+                  <p className="mt-1 text-red-600 text-sm">{errors.organizationName}</p>
                 )}
               </div>
               
               {/* Role */}
               <div>
-                <label htmlFor="role" className="block text-white font-medium mb-2">
+                <label htmlFor="role" className="block text-navy font-medium mb-2">
                   Your Role
                 </label>
                 <select
@@ -205,23 +224,24 @@ const Signup = () => {
                   name="role"
                   value={formData.role}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 rounded-lg bg-white/30 backdrop-blur-sm border ${
-                    errors.role ? 'border-red-500' : 'border-white/20'
-                  } focus:border-sustainability focus:ring-1 focus:ring-sustainability text-white appearance-none`}
+                  className={`w-full px-4 py-3 rounded-lg border-2 ${
+                    errors.role ? 'border-red-500' : 'border-gray-200'
+                  } focus:border-sustainability focus:ring-2 focus:ring-sustainability/20 text-navy appearance-none transition-colors`}
+                  style={{ backgroundImage: 'url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6 9 12 15 18 9\'%3e%3c/polyline%3e%3c/svg%3e")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 0.7rem top 50%', backgroundSize: '1.5rem auto' }}
                 >
-                  <option value="" className="bg-navy text-white">Select your role</option>
-                  <option value="Procurement Manager" className="bg-navy text-white">Procurement Manager</option>
-                  <option value="Investor" className="bg-navy text-white">Investor</option>
-                  <option value="Producer" className="bg-navy text-white">Producer</option>
+                  <option value="">Select your role</option>
+                  <option value="Procurement Manager">Procurement Manager</option>
+                  <option value="Investor">Investor</option>
+                  <option value="Producer">Producer</option>
                 </select>
                 {errors.role && (
-                  <p className="mt-1 text-red-300 text-sm">{errors.role}</p>
+                  <p className="mt-1 text-red-600 text-sm">{errors.role}</p>
                 )}
               </div>
               
               {/* Password */}
               <div>
-                <label htmlFor="password" className="block text-white font-medium mb-2">
+                <label htmlFor="password" className="block text-navy font-medium mb-2">
                   Password
                 </label>
                 <input
@@ -230,19 +250,19 @@ const Signup = () => {
                   type="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 rounded-lg bg-white/30 backdrop-blur-sm border ${
-                    errors.password ? 'border-red-500' : 'border-white/20'
-                  } focus:border-sustainability focus:ring-1 focus:ring-sustainability text-white placeholder-white/70`}
+                  className={`w-full px-4 py-3 rounded-lg border-2 ${
+                    errors.password ? 'border-red-500' : 'border-gray-200'
+                  } focus:border-sustainability focus:ring-2 focus:ring-sustainability/20 text-navy placeholder-gray-400 transition-colors`}
                   placeholder="••••••••"
                 />
                 {errors.password && (
-                  <p className="mt-1 text-red-300 text-sm">{errors.password}</p>
+                  <p className="mt-1 text-red-600 text-sm">{errors.password}</p>
                 )}
               </div>
               
               {/* Confirm Password */}
               <div>
-                <label htmlFor="confirmPassword" className="block text-white font-medium mb-2">
+                <label htmlFor="confirmPassword" className="block text-navy font-medium mb-2">
                   Confirm Password
                 </label>
                 <input
@@ -251,22 +271,24 @@ const Signup = () => {
                   type="password"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 rounded-lg bg-white/30 backdrop-blur-sm border ${
-                    errors.confirmPassword ? 'border-red-500' : 'border-white/20'
-                  } focus:border-sustainability focus:ring-1 focus:ring-sustainability text-white placeholder-white/70`}
+                  className={`w-full px-4 py-3 rounded-lg border-2 ${
+                    errors.confirmPassword ? 'border-red-500' : 'border-gray-200'
+                  } focus:border-sustainability focus:ring-2 focus:ring-sustainability/20 text-navy placeholder-gray-400 transition-colors`}
                   placeholder="••••••••"
                 />
                 {errors.confirmPassword && (
-                  <p className="mt-1 text-red-300 text-sm">{errors.confirmPassword}</p>
+                  <p className="mt-1 text-red-600 text-sm">{errors.confirmPassword}</p>
                 )}
               </div>
             </div>
             
-            <div>
-              <button
+            <div className="pt-2">
+              <motion.button
                 type="submit"
                 disabled={isLoading}
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-white bg-sustainability hover:bg-sustainability/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sustainability"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-md text-white text-lg font-semibold bg-sustainability hover:bg-sustainability/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sustainability transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? (
                   <span className="flex items-center">
@@ -279,17 +301,25 @@ const Signup = () => {
                 ) : (
                   'Create Account'
                 )}
-              </button>
+              </motion.button>
             </div>
           </form>
           
-          <div className="mt-6 text-center">
-            <p className="text-white">
+          <div className="mt-6 pt-6 border-t border-gray-200 text-center">
+            <p className="text-gray-600">
               Already have an account?{' '}
-              <Link to="/login" className="font-medium text-white hover:text-sustainability">
+              <Link to="/login" className="font-semibold text-sustainability hover:text-sustainability/80 transition-colors">
                 Sign in here
               </Link>
             </p>
+          </div>
+        </div>
+
+          {/* Additional links */}
+          <div className="mt-6 text-center">
+            <Link to="/" className="text-sm text-gray-500 hover:text-navy transition-colors">
+              ← Back to home
+            </Link>
           </div>
         </motion.div>
       </div>

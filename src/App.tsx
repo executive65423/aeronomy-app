@@ -19,6 +19,9 @@ const SAFSuite = lazy(() => import('./pages/products/SAFSuite'))
 const Login = lazy(() => import('./pages/Login'))
 const Signup = lazy(() => import('./pages/Signup'))
 const Dashboard = lazy(() => import('./pages/Dashboard'))
+const Privacy = lazy(() => import('./pages/Privacy'))
+const Terms = lazy(() => import('./pages/Terms'))
+const Cookies = lazy(() => import('./pages/Cookies'))
 
 // Loading component
 const LoadingFallback = () => (
@@ -91,6 +94,9 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/cookies" element={<Cookies />} />
             <Route path="*" element={<div className="p-10 text-center">Page Not Found</div>} />
           </Routes>
         </Suspense>
