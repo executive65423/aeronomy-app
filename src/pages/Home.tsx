@@ -1641,7 +1641,8 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={isPlatformFeaturesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
@@ -1664,8 +1665,9 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                 <motion.div
                   key={category}
                   initial={{ opacity: 0, y: 50 }}
-                  animate={isPlatformFeaturesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                  transition={{ duration: 0.8, delay: categoryIndex * 0.15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.8, delay: categoryIndex * 0.1 }}
                   className="bg-white dark:bg-dark-surface rounded-xl border border-gray-200 p-8"
                 >
                   <div className="flex items-center mb-8 pb-6 border-b border-gray-100">
@@ -1683,8 +1685,9 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                       <motion.div
                         key={featureIndex}
                         initial={{ opacity: 0, scale: 0.95 }}
-                        animate={isPlatformFeaturesInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-                        transition={{ duration: 0.5, delay: (categoryIndex * 0.15) + (featureIndex * 0.05) }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true, amount: 0.1 }}
+                        transition={{ duration: 0.5, delay: (categoryIndex * 0.1) + (featureIndex * 0.03) }}
                         whileHover={{ y: -3 }}
                         className="bg-white dark:bg-dark-card p-5 rounded-lg border border-gray-100 hover:border-sustainability/30 hover:shadow-md transition-all"
                       >
