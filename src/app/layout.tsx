@@ -9,7 +9,6 @@ import { TailwindIndicator } from '../components/tailwind-indicator'
 import { ThemeProvider } from '../components/theme-provider'
 import { SiteHeader } from '../components/site-header'
 import { SiteFooter } from '../components/site-footer'
-import Chatbot from '../components/Chatbot'
 
 import '../styles/globals.css'
 
@@ -33,7 +32,6 @@ export default function RootLayout({
             <SiteHeader />
             <div className="flex-1">{children}</div>
             <SiteFooter />
-            <Chatbot />
           </div>
           <TailwindIndicator />
           <Toaster />

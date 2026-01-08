@@ -462,18 +462,18 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black/50 z-10"></div>
         
-        <div className="container max-w-6xl mx-auto px-4 relative z-20 pt-20 md:pt-0">
+        <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative z-20 pt-24 sm:pt-28 md:pt-0">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="max-w-2xl"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight text-white">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight text-white">
               The only SAF platform you will ever need.
             </h1>
 
-            <p className="text-4xl md:text-6xl mb-8 text-white font-bold leading-tight">
+            <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-6 sm:mb-8 text-white font-bold leading-tight">
               That's <span className="text-white">Aero</span><span className="text-sustainability">nomy</span>.
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
@@ -527,63 +527,63 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
           </div>
           
           {/* Player Tabs */}
-          <div className="flex justify-center mb-12">
-            <div className="inline-flex rounded-md shadow-sm p-1 bg-gray-100" role="group">
+          <div className="flex justify-center mb-8 sm:mb-12 px-4">
+            <div className="inline-flex flex-wrap justify-center rounded-md shadow-sm p-1 bg-gray-100 gap-1" role="group">
               <button
                 type="button"
-                className={`py-3 px-6 rounded-md shadow-sm font-medium flex items-center transition-all ${
+                className={`py-2 sm:py-3 px-3 sm:px-6 rounded-md shadow-sm font-medium flex items-center transition-all text-sm sm:text-base ${
                   selectedPlayerTab === 'airlines' 
                     ? 'bg-navy text-white' 
                     : 'text-gray-700 hover:bg-gray-200'
                 }`}
                 onClick={() => setSelectedPlayerTab('airlines')}
               >
-                <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M21 16V14L13 9V3.5C13 2.67 12.33 2 11.5 2C10.67 2 10 2.67 10 3.5V9L2 14V16L10 13.5V19L8 20.5V22L11.5 21L15 22V20.5L13 19V13.5L21 16Z" fill="currentColor"/>
                 </svg>
-                Airlines
+                <span className="whitespace-nowrap">Airlines</span>
               </button>
               <button
                 type="button"
-                className={`py-3 px-6 rounded-md shadow-sm font-medium flex items-center transition-all ${
+                className={`py-2 sm:py-3 px-3 sm:px-6 rounded-md shadow-sm font-medium flex items-center transition-all text-sm sm:text-base ${
                   selectedPlayerTab === 'investors' 
                     ? 'bg-navy text-white' 
                     : 'text-gray-700 hover:bg-gray-200'
                 }`}
                 onClick={() => setSelectedPlayerTab('investors')}
               >
-                <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4 18V14.5M4 14.5V9.5M4 14.5H10.5M4 9.5V6M4 9.5H16.5M16.5 9.5V14.5M16.5 9.5C19 9.5 20 11 20 12.5C20 14 19 15.5 16.5 15.5H10.5M16.5 15.5V18M10.5 14.5V6M10.5 14.5V18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                Investors
+                <span className="whitespace-nowrap">Investors</span>
               </button>
               <button
                 type="button"
-                className={`py-3 px-6 rounded-md shadow-sm font-medium flex items-center transition-all ${
+                className={`py-2 sm:py-3 px-3 sm:px-6 rounded-md shadow-sm font-medium flex items-center transition-all text-sm sm:text-base ${
                   selectedPlayerTab === 'producers' 
                     ? 'bg-navy text-white' 
                     : 'text-gray-700 hover:bg-gray-200'
                 }`}
                 onClick={() => setSelectedPlayerTab('producers')}
               >
-                <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M9 4.5V19.5M9 19.5H4.5M9 19.5H15M15 19.5H19.5M15 19.5C15 13.5 19.5 13.5 19.5 9C19.5 5.5 17.5 4.5 15 4.5C12.5 4.5 10.5 7 10.5 9.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                SAF Producers
+                <span className="whitespace-nowrap">SAF Producers</span>
               </button>
             </div>
           </div>
           
           {/* Content based on selected tab */}
           {selectedPlayerTab === 'airlines' && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
               <div>
                 <motion.h3
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
                   viewport={{ once: true }}
-                  className="text-3xl font-bold mb-6 text-navy"
+                  className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-navy"
                 >
                   Cut SAF costs 20%+ with dynamic procurement and hedging
                 </motion.h3>
@@ -1052,63 +1052,66 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
           </div>
           
           {/* Component Navigation */}
-          <div className="flex justify-center mb-16">
-            <div className="inline-flex flex-wrap justify-center gap-3 p-2 bg-white rounded-2xl shadow-lg border border-gray-100">
+          <div className="flex justify-center mb-8 sm:mb-12 lg:mb-16 px-4">
+            <div className="inline-flex flex-wrap justify-center gap-2 sm:gap-3 p-2 bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100">
               <button
                 type="button"
-                className={`py-4 px-6 rounded-xl font-medium transition-all duration-300 flex items-center whitespace-nowrap ${
+                className={`py-2 sm:py-3 md:py-4 px-3 sm:px-5 md:px-6 rounded-lg sm:rounded-xl font-medium transition-all duration-300 flex items-center whitespace-nowrap text-xs sm:text-sm md:text-base ${
                   selectedPlatformTab === 'marketplace' 
                     ? 'bg-navy text-white shadow-lg transform scale-105' 
                     : 'text-gray-600 hover:bg-gray-50 hover:text-navy'
                 }`}
                 onClick={() => setSelectedPlatformTab('marketplace')}
               >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5M16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
                 </svg>
-                SAF Marketplace
+                <span className="hidden sm:inline">SAF Marketplace</span>
+                <span className="sm:hidden">Marketplace</span>
               </button>
               
               <button
                 type="button"
-                className={`py-4 px-6 rounded-xl font-medium transition-all duration-300 flex items-center whitespace-nowrap ${
+                className={`py-2 sm:py-3 md:py-4 px-3 sm:px-5 md:px-6 rounded-lg sm:rounded-xl font-medium transition-all duration-300 flex items-center whitespace-nowrap text-xs sm:text-sm md:text-base ${
                   selectedPlatformTab === 'compliance' 
                     ? 'bg-navy text-white shadow-lg transform scale-105' 
                     : 'text-gray-600 hover:bg-gray-50 hover:text-navy'
                 }`}
                 onClick={() => setSelectedPlatformTab('compliance')}
               >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                Compliance Automation
+                <span className="hidden sm:inline">Compliance Automation</span>
+                <span className="sm:hidden">Compliance</span>
               </button>
               
               <button
                 type="button"
-                className={`py-4 px-6 rounded-xl font-medium transition-all duration-300 flex items-center whitespace-nowrap ${
+                className={`py-2 sm:py-3 md:py-4 px-3 sm:px-5 md:px-6 rounded-lg sm:rounded-xl font-medium transition-all duration-300 flex items-center whitespace-nowrap text-xs sm:text-sm md:text-base ${
                   selectedPlatformTab === 'financial' 
                     ? 'bg-navy text-white shadow-lg transform scale-105' 
                     : 'text-gray-600 hover:bg-gray-50 hover:text-navy'
                 }`}
                 onClick={() => setSelectedPlatformTab('financial')}
               >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                Financial Instruments
+                <span className="hidden sm:inline">Financial Instruments</span>
+                <span className="sm:hidden">Financial</span>
               </button>
               
               <button
                 type="button"
-                className={`py-4 px-6 rounded-xl font-medium transition-all duration-300 flex items-center whitespace-nowrap ${
+                className={`py-2 sm:py-3 md:py-4 px-3 sm:px-5 md:px-6 rounded-lg sm:rounded-xl font-medium transition-all duration-300 flex items-center whitespace-nowrap text-xs sm:text-sm md:text-base ${
                   selectedPlatformTab === 'analytics' 
                     ? 'bg-navy text-white shadow-lg transform scale-105' 
                     : 'text-gray-600 hover:bg-gray-50 hover:text-navy'
                 }`}
                 onClick={() => setSelectedPlatformTab('analytics')}
               >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                 </svg>
                 Analytics
@@ -1443,16 +1446,17 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
               <span className="text-navy font-medium">Enterprise-Grade SAF Procurement Platform</span>
             </motion.div>
 
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-navy">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-navy">
               Next-Generation{' '}
               <span className="bg-gradient-to-r from-sustainability to-sky-500 bg-clip-text text-transparent">
                 SAF Workflows
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-600 mb-6 sm:mb-8 leading-relaxed px-4 sm:px-0">
               Comprehensive procurement lifecycle management inspired by enterprise solutions,
-              <br className="hidden md:block" />
+              <span className="hidden md:inline"><br /></span>
+              <span className="md:hidden"> </span>
               designed specifically for sustainable aviation fuel sourcing.
             </p>
 
@@ -1495,16 +1499,16 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
           }}
         />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-navy dark:text-white mb-4">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16 px-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-navy dark:text-white mb-3 sm:mb-4">
               Platform Capabilities
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Six core modules that power the future of sustainable aviation fuel procurement
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto px-4">
             {featureSections.map((section, index) => {
               const IconComponent = section.icon
               return (
@@ -1554,12 +1558,12 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
             initial={{ opacity: 0, y: 30 }}
             animate={isWorkflowsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-8 sm:mb-12 lg:mb-16 px-4"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-navy dark:text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-navy dark:text-white mb-3 sm:mb-4">
               Procurement Lifecycle Workflows
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto">
               Comprehensive P2P (Procure-to-Pay) workflows designed specifically for SAF procurement,
               ensuring compliance, transparency, and efficiency at every step.
             </p>
@@ -1583,21 +1587,21 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                     <div className="flex items-start gap-6">
                       {/* Step number circle */}
                       <div className="flex-shrink-0 relative z-10">
-                        <div className="w-16 h-16 rounded-full bg-white border-4 border-sustainability flex items-center justify-center shadow-lg">
-                          <span className="text-2xl font-bold text-sustainability">{workflow.step}</span>
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white border-4 border-sustainability flex items-center justify-center shadow-lg">
+                          <span className="text-xl sm:text-2xl font-bold text-sustainability">{workflow.step}</span>
                         </div>
                       </div>
                       
                       {/* Content card */}
                       <motion.div
                         whileHover={{ scale: 1.02, boxShadow: '0 10px 25px rgba(0, 160, 220, 0.15)' }}
-                        className="flex-1 bg-white border border-gray-200 rounded-xl p-6 shadow-sm transition-all cursor-pointer"
+                        className="flex-1 bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm transition-all cursor-pointer"
                         onClick={() => setExpandedWorkflow(expandedWorkflow === workflow.id ? null : workflow.id)}
                       >
-                        <h3 className="text-lg font-bold text-navy mb-2">
+                        <h3 className="text-base sm:text-lg font-bold text-navy mb-2">
                           {workflow.title}
                         </h3>
-                        <p className="text-gray-600 text-sm leading-relaxed">
+                        <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
                           {workflow.description}
                         </p>
                         
@@ -1720,26 +1724,26 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
           <source src="/videos/sky.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-navy/90 to-navy/80" />
-        <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-4xl font-bold mb-12 text-center text-white">Market Predictions</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-white">
-              <div className="text-3xl font-bold mb-4">15-20%</div>
-              <p className="text-lg">Average procurement cost reduction through AI-optimized timing</p>
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-12 text-center text-white">Market Predictions</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-white">
+              <div className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">15-20%</div>
+              <p className="text-sm sm:text-base md:text-lg">Average procurement cost reduction through AI-optimized timing</p>
             </div>
-            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-white">
-              <div className="text-3xl font-bold mb-4">300%</div>
-              <p className="text-lg">Projected SAF market growth over the next 5 years</p>
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-white">
+              <div className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">300%</div>
+              <p className="text-sm sm:text-base md:text-lg">Projected SAF market growth over the next 5 years</p>
             </div>
-            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-white">
-              <div className="text-3xl font-bold mb-4">95%</div>
-              <p className="text-lg">AI model prediction accuracy for SAF market trends</p>
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-white sm:col-span-2 lg:col-span-1">
+              <div className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">95%</div>
+              <p className="text-sm sm:text-base md:text-lg">AI model prediction accuracy for SAF market trends</p>
             </div>
           </div>
-          <div className="mt-12 text-center">
+          <div className="mt-8 sm:mt-12 text-center">
             <a
               href="/contact"
-              className="inline-block bg-sustainability text-white px-8 py-3 rounded-lg hover:bg-sustainability/90 transition-colors"
+              className="inline-block bg-sustainability text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg hover:bg-sustainability/90 transition-colors text-sm sm:text-base w-full sm:w-auto"
             >
               Get Your Custom Market Analysis
             </a>
@@ -1768,18 +1772,18 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-navy mb-4 sm:mb-6 px-4">
               Ready to Transform Your SAF Procurement?
             </h2>
-            <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-10 max-w-3xl mx-auto leading-relaxed px-4">
               Join leading airlines already using Aeronomy's platform to streamline their 
               sustainable aviation fuel sourcing and compliance workflows.
             </p>
-            <div className="flex justify-center">
+            <div className="flex justify-center px-4">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-sustainability text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-sustainability/90 transition-colors shadow-lg"
+                className="bg-sustainability text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-base sm:text-lg hover:bg-sustainability/90 transition-colors shadow-lg w-full sm:w-auto"
                 onClick={() => toggleModal(true)}
               >
                 Request Demo

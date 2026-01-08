@@ -13,8 +13,8 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">About Aeronomy</h1>
-            <p className="text-xl text-white/90 mb-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">About Aeronomy</h1>
+            <p className="text-lg sm:text-xl text-white/90 mb-6 sm:mb-8">
               Pioneering solutions for sustainable aviation fuel management and procurement.
             </p>
           </motion.div>
@@ -44,16 +44,16 @@ const About = () => {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="bg-gray-50 p-6 rounded-xl"
+                className="bg-gray-50 p-4 sm:p-6 rounded-xl"
               >
-                <div className="text-sustainability text-4xl font-bold mb-3">15%</div>
-                <p className="text-gray-700">Average procurement cost reduction for our airline partners</p>
+                <div className="text-sustainability text-3xl sm:text-4xl font-bold mb-2 sm:mb-3">15%</div>
+                <p className="text-gray-700 text-sm sm:text-base">Average procurement cost reduction for our airline partners</p>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -162,14 +162,14 @@ const About = () => {
             <p className="text-lg mb-8">
               We're always looking for talented individuals who are passionate about transforming the aviation industry. Check out our open positions or contact us to learn more.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 px-4">
               <Link to="/careers">
-                <button className="px-8 py-3 bg-white text-sustainability font-semibold rounded-lg shadow-md hover:bg-gray-100 transition-colors">
+                <button className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-white text-sustainability font-semibold rounded-lg shadow-md hover:bg-gray-100 transition-colors text-sm sm:text-base">
                   View Careers
                 </button>
               </Link>
               <Link to="/contact">
-                <button className="px-8 py-3 bg-sustainability-dark text-white font-semibold rounded-lg shadow-md hover:bg-sustainability-dark/90 transition-colors">
+                <button className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-sustainability-dark text-white font-semibold rounded-lg shadow-md hover:bg-sustainability-dark/90 transition-colors text-sm sm:text-base">
                   Contact Us
                 </button>
               </Link>
