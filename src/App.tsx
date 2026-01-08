@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Chatbot from './components/Chatbot'
 import CustomScrollbar from './components/CustomScrollbar'
 import Footer from './components/Footer'
 // Temporarily comment out LoadingAnimation to test if it's causing the issue
@@ -10,7 +9,6 @@ import Footer from './components/Footer'
 // Lazy load page components
 const Home = lazy(() => import('./pages/Home'))
 const About = lazy(() => import('./pages/About'))
-const Resources = lazy(() => import('./pages/Resources'))
 const Solutions = lazy(() => import('./pages/Solutions'))
 const Products = lazy(() => import('./pages/products'))
 const Analytica = lazy(() => import('./pages/products/Analytica'))
@@ -85,7 +83,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Home showDemoModal={showDemoModal} setShowDemoModal={setShowDemoModal} />} />
             <Route path="/about" element={<About />} />
-            <Route path="/resources" element={<Resources />} />
             <Route path="/solutions" element={<Solutions />} />
             <Route path="/products" element={<Products />} />
             <Route path="/products/analytica" element={<Analytica />} />
@@ -102,8 +99,6 @@ function App() {
         </Suspense>
       </div>
       <Footer />
-      {/* Chatbot */}
-      <Chatbot />
       {/* Custom Scrollbar */}
       <CustomScrollbar />
     </div>

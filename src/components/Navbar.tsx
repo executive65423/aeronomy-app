@@ -10,8 +10,7 @@ interface NavbarProps {
 const NAV_ITEMS = [
   { label: 'Features', href: '#features', isAnchor: true },
   { label: 'View Solutions', href: '/solutions' },
-  { label: 'About Us', href: '/about' },
-  { label: 'Resources', href: '/resources' }
+  { label: 'About Us', href: '/about' }
 ];
 
 // Product dropdown items
@@ -127,8 +126,8 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
   };
 
   // Dynamic island styling - shrinks horizontally when scrolled
-  const navbarWidth = isScrolled ? 'max-w-6xl' : 'w-[90%] max-w-[1400px]';
-  const navbarPadding = isScrolled ? 'px-8 py-2.5' : 'px-12 py-4';
+  const navbarWidth = isScrolled ? 'max-w-6xl' : 'w-[95%] sm:w-[90%] max-w-[1400px]';
+  const navbarPadding = isScrolled ? 'px-4 sm:px-8 py-2.5' : 'px-4 sm:px-8 md:px-12 py-3 sm:py-4';
   const navbarRounded = 'rounded-full';
   const navbarShadow = isScrolled ? 'shadow-lg' : 'shadow-2xl';
   const navbarBackground = 'bg-white/90 backdrop-blur-2xl border border-slate-200';
@@ -140,22 +139,19 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
   const buttonStyle = 'bg-navy hover:bg-navy-dark text-white border border-navy';
   
   // Font size adjustments for logo when scrolled
-  const logoSize = isScrolled ? 'text-xl' : 'text-2xl';
+  const logoSize = isScrolled ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl';
   
   // Button size adjustments when scrolled
-  const buttonSize = isScrolled ? 'px-4 py-2 text-sm' : 'px-6 py-3 text-base';
+  const buttonSize = isScrolled ? 'px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm' : 'px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base';
   
   // Link size adjustments when scrolled
-  const linkSize = isScrolled ? 'text-sm' : 'text-base';
+  const linkSize = isScrolled ? 'text-xs sm:text-sm' : 'text-sm sm:text-base';
 
   // Handle login/dashboard click
   const handleLoginClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (isLoggedIn) {
-      navigate('/dashboard');
-    } else {
-      navigate('/login');
-    }
+    // Redirect to app.aeronomy.co
+    window.location.href = 'https://app.aeronomy.co';
     // Close mobile menu if open
     if (mobileMenuOpen) {
       setMobileMenuOpen(false);
@@ -163,9 +159,9 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
   };
 
   return (
-    <nav className="fixed w-full z-50 flex justify-center pt-4 px-4 transition-all duration-500">
-      <div className={`${navbarWidth} ${navbarPadding} ${navbarRounded} ${navbarShadow} ${navbarBackground} transition-all duration-500 ease-in-out`}>
-        <div className="flex justify-between items-center gap-x-4 md:gap-x-6">
+    <nav className="fixed w-full z-50 flex flex-col items-center pt-2 sm:pt-4 px-2 sm:px-4 transition-all duration-500">
+      <div className={`${navbarWidth} ${navbarPadding} ${navbarRounded} ${navbarShadow} ${navbarBackground} transition-all duration-500 ease-in-out relative`}>
+        <div className="flex justify-between items-center gap-x-2 sm:gap-x-4 md:gap-x-6">
           <Link to="/" className="flex items-center">
             <span className={`${logoSize} font-bold navbar-logo ${logoStyle} transition-all duration-500`}>
               <span className="text-navy">Aero</span>
@@ -231,10 +227,10 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
         </div>
       </div>
       
-      {/* Mobile menu */}
+      {/* Mobile menu - positioned absolutely below navbar */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-gradient-to-br from-sky-100/95 to-blue-50/95 backdrop-blur-xl rounded-3xl mt-4 mx-4 shadow-2xl border border-sky-200 pb-4 px-4">
-          <div className="flex flex-col space-y-4 pt-2 pb-3">
+        <div className="md:hidden fixed top-20 sm:top-24 left-4 right-4 z-40 bg-gradient-to-br from-sky-100/95 to-blue-50/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-sky-200 pb-4 px-4 max-w-md mx-auto">
+          <div className="flex flex-col space-y-4 pt-4 pb-3">
             {NAV_ITEMS.map((item) => (
               item.isAnchor ? (
                 <a 

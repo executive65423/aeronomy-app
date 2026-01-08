@@ -250,10 +250,10 @@ const Solutions = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-navy mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-navy mb-4 sm:mb-6 px-4">
               Aeronomy Solution Modules
             </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8 leading-relaxed px-4">
               Comprehensive, enterprise-ready modules covering onboarding and compliance, 
               procurement to award, allocation and custody, verifiable certification, reporting, 
               risk management, and integrations. Designed to be compliance-first with clear 
@@ -278,7 +278,7 @@ const Solutions = () => {
         />
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-7xl mx-auto px-4">
             {solutionModules.map((module, index) => {
               const IconComponent = module.icon
               return (
@@ -352,19 +352,19 @@ const Solutions = () => {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-navy mb-4 sm:mb-6 px-4">
               Ready to Get Started?
             </h2>
-            <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-10 max-w-3xl mx-auto leading-relaxed px-4">
               Discover how Aeronomy's comprehensive solution modules can transform your 
               SAF procurement and compliance workflows.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
               <motion.a
                 href="/#"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-sustainability text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-sustainability/90 transition-colors shadow-lg inline-block"
+                className="bg-sustainability text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-base sm:text-lg hover:bg-sustainability/90 transition-colors shadow-lg inline-block text-center w-full sm:w-auto"
               >
                 Request Demo
               </motion.a>
@@ -372,7 +372,7 @@ const Solutions = () => {
                 href="/about"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-navy border-2 border-navy px-8 py-4 rounded-xl font-semibold text-lg hover:bg-navy hover:text-white transition-colors inline-block"
+                className="bg-white text-navy border-2 border-navy px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-base sm:text-lg hover:bg-navy hover:text-white transition-colors inline-block text-center w-full sm:w-auto"
               >
                 Learn More
               </motion.a>

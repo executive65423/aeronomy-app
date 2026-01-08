@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="bg-navy-dark text-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
           {/* Company Section */}
           <div>
             <h3 className="text-xl font-bold mb-4">Aeronomy</h3>
@@ -64,11 +62,6 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/resources" className="text-gray-300 hover:text-sustainability">
-                  Resources
-                </Link>
-              </li>
-              <li>
                 <Link to="/contact" className="text-gray-300 hover:text-sustainability">
                   Contact
                 </Link>
@@ -99,22 +92,29 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Compliance Badges */}
-        <div className="mt-12 flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-700">
-          <div className="mb-4 md:mb-0">
-            <div className="bg-gray-800 px-6 py-3 rounded-full text-sm text-white flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span>CORSIA-Certified</span>
-              <span className="mx-2">•</span>
-              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-              <span>EU Taxonomy-Aligned</span>
-              <span className="mx-2">•</span>
-              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-              <span>IRA Compliant</span>
+        {/* Footer Bottom with Logo and Copyright */}
+        <div className="mt-8 sm:mt-12 flex flex-col md:flex-row justify-between items-center pt-6 sm:pt-8 border-t border-gray-700 gap-4">
+          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
+            <img 
+              src="/images/logo.jpg" 
+              alt="Aeronomy Logo" 
+              className="h-10 sm:h-12 w-auto"
+            />
+            <div className="text-gray-400 text-xs sm:text-sm text-center sm:text-left">
+              © 2026 Aeronomy. All rights reserved.
             </div>
           </div>
-          <div className="text-gray-400 text-sm">
-            © {currentYear} Aeronomy. All rights reserved.
+          <div className="w-full sm:w-auto">
+            <div className="bg-gray-800 px-4 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm text-white flex flex-wrap items-center justify-center gap-1 sm:gap-2">
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
+              <span className="whitespace-nowrap">CORSIA-Certified</span>
+              <span className="mx-1 sm:mx-2 hidden sm:inline">•</span>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-blue-500 rounded-full"></div>
+              <span className="whitespace-nowrap">EU Taxonomy-Aligned</span>
+              <span className="mx-1 sm:mx-2 hidden sm:inline">•</span>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
+              <span className="whitespace-nowrap">IRA Compliant</span>
+            </div>
           </div>
         </div>
       </div>
