@@ -430,12 +430,12 @@ const Home = () => {
   return (
     <div className="pt-0">
       {/* News Ticker - Below Navbar */}
-      <div className="fixed top-[85px] sm:top-[90px] left-0 right-0 z-30">
+      <div className="fixed top-[95px] sm:top-[100px] left-0 right-0 z-30">
         <NewsTicker />
       </div>
 
       {/* Hero Section with Video Background */}
-      <section className="relative min-h-screen flex items-center overflow-hidden pt-[70px]">
+      <section className="relative min-h-screen flex items-center overflow-hidden pt-[75px]">
         {/* Single video background */}
         <video
           className="absolute inset-0 w-full h-full object-cover"

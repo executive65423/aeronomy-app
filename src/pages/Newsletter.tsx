@@ -17,12 +17,26 @@ const Newsletter = () => {
       />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Featured Image - Above Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-5xl mx-auto pt-12 mb-8"
+        >
+          <img
+            src="/images/pr.png"
+            alt="Yoki Green Energy Partnership"
+            className="w-full h-auto rounded-xl shadow-2xl"
+          />
+        </motion.div>
+
         {/* Article Header */}
         <motion.header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto pt-12 pb-8"
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="max-w-4xl mx-auto pb-8"
         >
           <div className="mb-6">
             <span className="inline-block px-4 py-2 bg-sustainability/10 text-sustainability rounded-full text-sm font-semibold mb-4">
@@ -37,27 +51,13 @@ const Newsletter = () => {
           </div>
         </motion.header>
 
-        {/* Featured Image */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="max-w-5xl mx-auto mb-12"
-        >
-          <img
-            src="/images/pr.png"
-            alt="Aeronomy Platform"
-            className="w-full h-auto rounded-xl shadow-2xl"
-          />
-        </motion.div>
-
         {/* Article Content */}
         <article className="max-w-4xl mx-auto pb-16">
           {/* Introduction */}
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
             className="mb-12"
           >
             <p className="text-xl sm:text-2xl text-gray-700 leading-relaxed font-medium mb-6">
@@ -87,7 +87,7 @@ const Newsletter = () => {
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
             className="mb-12"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-navy mb-6 mt-12">
@@ -128,7 +128,7 @@ const Newsletter = () => {
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
             className="mb-12"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-navy mb-6 mt-12">
@@ -157,7 +157,7 @@ const Newsletter = () => {
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
             className="mb-12 bg-gradient-to-br from-navy to-navy-dark text-white p-8 sm:p-12 rounded-2xl"
           >
             <h2 className="text-3xl sm:text-4xl font-bold mb-8">
@@ -186,7 +186,7 @@ const Newsletter = () => {
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
             className="mb-12"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -249,7 +249,7 @@ const Newsletter = () => {
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
             className="mb-12 bg-gray-50 p-8 rounded-2xl border border-gray-200"
           >
             <h2 className="text-2xl sm:text-3xl font-bold text-navy mb-6">
@@ -277,11 +277,23 @@ const Newsletter = () => {
             </div>
           </motion.section>
 
+          {/* Stay Tuned Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.0 }}
+            className="mt-12 text-center bg-gradient-to-r from-sustainability/10 to-navy/10 py-8 px-6 rounded-2xl"
+          >
+            <p className="text-xl sm:text-2xl font-semibold text-navy">
+              Stay tuned for more updates.
+            </p>
+          </motion.div>
+
           {/* Footer */}
           <motion.footer
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
             className="mt-12 pt-8 border-t border-gray-200 text-center text-gray-600"
           >
             <p className="text-lg font-semibold text-navy mb-4">— END —</p>

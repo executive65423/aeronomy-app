@@ -14,59 +14,147 @@ const NAV_ITEMS = [
     isAnchor: true,
     preview: {
       title: 'Platform Features',
-      description: 'Discover comprehensive tools for SAF procurement, compliance, and analytics.',
-      highlights: [
-        'AI-Driven Price Forecasting',
-        'Automated Compliance Reporting',
-        'Dynamic Hedging Solutions',
-        'Advanced Analytics & Insights'
-      ],
-      image: '/images/solution.jpg'
+      modules: [
+        { 
+          icon: 'FiTrendingUp',
+          title: 'AI-Driven Price Forecasting',
+          audience: 'Airlines and producers',
+          purpose: 'Predict market trends and optimize procurement timing.',
+          capabilities: ['Real-time market analysis', 'Historical data modeling', 'Price volatility alerts']
+        },
+        { 
+          icon: 'FiShield',
+          title: 'Automated Compliance',
+          audience: 'All stakeholders',
+          purpose: 'Ensure regulatory adherence across jurisdictions.',
+          capabilities: ['30+ framework support', 'Auto-generated reports', 'Audit trail management']
+        },
+        { 
+          icon: 'FiBarChart2',
+          title: 'Advanced Analytics',
+          audience: 'Decision makers',
+          purpose: 'Data-driven insights for strategic planning.',
+          capabilities: ['Custom dashboards', 'Emissions tracking', 'Performance metrics']
+        },
+        {
+          icon: 'FiCheck',
+          title: 'Quality Assurance',
+          audience: 'Producers',
+          purpose: 'Maintain high standards with automated checks.',
+          capabilities: ['Batch validation', 'Spec verification', 'Digital certificates']
+        }
+      ]
     }
   },
   { 
     label: 'View Solutions', 
     href: '/solutions',
     preview: {
-      title: 'Comprehensive Solution Modules',
-      description: 'Enterprise-ready modules covering onboarding, procurement, compliance, and more.',
-      highlights: [
-        'Producer Onboarding & Compliance',
-        'RFQ and Procurement Marketplace',
-        'Contracting & PO Management',
-        'Emissions Accounting & Reporting'
-      ],
-      image: '/images/data.jpg'
+      title: 'Solution Modules',
+      modules: [
+        { 
+          icon: 'FiCheck',
+          title: 'Producer Onboarding and Compliance',
+          audience: 'SAF producers',
+          purpose: 'Structured onboarding with region and pathway specific checks.',
+          capabilities: ['Dynamic forms by pathway', 'Certificate validation', 'Facility registry']
+        },
+        { 
+          icon: 'FiShoppingCart',
+          title: 'RFQ and Procurement Marketplace',
+          audience: 'Buyers and producers',
+          purpose: 'Standardized tendering for SAF supply.',
+          capabilities: ['RFQ wizard with CI targets', 'Supplier notification', 'Eligibility gating']
+        },
+        { 
+          icon: 'FiFileText',
+          title: 'Contracting and PO Management',
+          audience: 'Buyers and producers',
+          purpose: 'Generate purchase orders and contract exhibits.',
+          capabilities: ['Templated terms', 'Milestones tracking', 'Change order approvals']
+        },
+        {
+          icon: 'FiPackage',
+          title: 'Book and Claim Allocation',
+          audience: 'Airlines',
+          purpose: 'Allocate environmental attributes to flights.',
+          capabilities: ['Batch allocations', 'Unit enforcement', 'Real-time balance']
+        }
+      ]
     }
   },
   { 
     label: 'About Us', 
     href: '/about',
     preview: {
-      title: 'About Aeronomy',
-      description: 'Pioneering solutions for sustainable aviation fuel management and procurement.',
-      highlights: [
-        '15% Average cost reduction',
-        '$4.2B SAF transactions facilitated',
-        '30+ Global regulatory frameworks',
-        'Led by aviation experts'
-      ],
-      image: '/images/experts.jpeg'
+      title: 'Our Mission',
+      modules: [
+        { 
+          icon: 'FiTarget',
+          title: 'Accelerate SAF Adoption',
+          audience: 'Global aviation industry',
+          purpose: 'Making sustainable aviation fuel accessible worldwide.',
+          capabilities: ['Market access', 'Price transparency', 'Supply discovery']
+        },
+        { 
+          icon: 'FiShield',
+          title: 'Compliance-First Infrastructure',
+          audience: 'Airlines and producers',
+          purpose: 'Build trust through verified, audit-ready systems.',
+          capabilities: ['Regulatory alignment', 'Certificate verification', 'Audit trails']
+        },
+        { 
+          icon: 'FiActivity',
+          title: 'Real-Time Intelligence',
+          audience: 'All stakeholders',
+          purpose: 'Empower decisions with data and analytics.',
+          capabilities: ['Live market data', 'Supply tracking', 'Performance insights']
+        },
+        {
+          icon: 'FiUsers',
+          title: 'Unified Ecosystem',
+          audience: 'Industry wide',
+          purpose: 'Connecting all participants in one platform.',
+          capabilities: ['Seamless collaboration', 'Standardized flows', 'Network effects']
+        }
+      ]
     }
   },
   { 
     label: 'Newsletter', 
     href: '/newsletter',
     preview: {
-      title: 'Joint Press Release: Yoki Green Energy & Aeronomy Partnership',
-      description: 'Partnership to enable 50,000 metric tons of SAF offtake from 2027. Strategic collaboration combines Yoki\'s committed volumes with Aeronomy\'s compliance-grade procurement infrastructure.',
-      highlights: [
-        '50,000 metric tons FT-SPK SAF committed',
-        'Supply ready for offtake from 2027',
-        'Structured supply visibility for buyers',
-        'Compliance-grade documentation workflows'
-      ],
-      image: '/images/pr.png'
+      title: 'Partnership Announcement',
+      modules: [
+        { 
+          icon: 'FiUsers',
+          title: 'Yoki Green Energy × Aeronomy',
+          audience: 'Strategic Partnership',
+          purpose: 'A landmark collaboration to enable scalable SAF procurement.',
+          capabilities: ['Joint venture', 'Ecosystem integration', 'Market expansion']
+        },
+        { 
+          icon: 'FiPackage',
+          title: '50,000 Metric Tons Committed',
+          audience: 'Volume Commitment',
+          purpose: 'Secured supply of FT-SPK SAF produced from biomass.',
+          capabilities: ['50k MT volume', 'FT-SPK pathway', 'Biomass feedstock']
+        },
+        { 
+          icon: 'FiCalendar',
+          title: 'Supply Available From 2027',
+          audience: 'Timeline',
+          purpose: 'Production and offtake readiness timeline set for 2027.',
+          capabilities: ['2027 start date', 'Long-term supply', 'Future readiness']
+        },
+        {
+          icon: 'FiCheckCircle',
+          title: 'Verified & Auditable',
+          audience: 'Compliance',
+          purpose: 'Full traceability and compliance managed via Aeronomy platform.',
+          capabilities: ['Audit-ready docs', 'Sustainability proof', 'Digital chain of custody']
+        }
+      ]
     }
   }
 ];
@@ -149,7 +237,10 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
           paddingLeft: isHovered ? 0 : 8,
           paddingRight: isHovered ? 0 : 8,
         }}
-        transition={{ duration: 1, ease: [0.19, 1, 0.22, 1] }}
+        transition={{ 
+          duration: 0.6,
+          ease: [0.25, 0.1, 0.25, 1]
+        }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => {
           setIsHovered(false);
@@ -158,7 +249,8 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
       >
         {/* The "Island" / Background - Adaptive Theme */}
         <motion.div
-          className={`${isLightPage ? 'bg-navy' : 'bg-navy/95'} backdrop-blur-2xl shadow-2xl border border-navy-dark/50 overflow-hidden relative w-full`}
+          className={`${isLightPage ? 'bg-navy' : 'bg-navy/95'} backdrop-blur-2xl shadow-2xl relative w-full`}
+          style={{ overflow: 'hidden' }}
           initial={false}
           animate={{
             width: isHovered ? '100vw' : (isScrolled ? '96%' : '95%'),
@@ -167,13 +259,13 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
             borderRadius: isHovered ? 0 : 9999,
           }}
           transition={{ 
-            duration: 1,
-            ease: [0.19, 1, 0.22, 1] // Very smooth ease-out
+            duration: 0.6,
+            ease: [0.25, 0.1, 0.25, 1]
           }}
         >
           {/* 
             Collapsed View (Horizontal) - Dark Theme
-            - Smooth fade out with careful timing
+            - Fades in as navbar collapses
           */}
           <motion.div 
             className="absolute inset-0 flex items-center justify-between px-4 sm:px-6 md:px-8"
@@ -181,7 +273,11 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
               opacity: isHovered ? 0 : 1, 
               pointerEvents: isHovered ? 'none' : 'auto',
             }}
-            transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
+            transition={{ 
+              duration: 0.35,
+              delay: isHovered ? 0 : 0.35,
+              ease: "easeOut"
+            }}
           >
             {/* Logo */}
             <Link to="/" className="flex items-center flex-shrink-0 z-50">
@@ -264,19 +360,23 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
           </motion.div>
 
           {/* 
-            Expanded View (Split Layout) - Dark Theme
-            - Smooth fade in with careful timing
+            Expanded View (Split Layout) - Clean split
+            - Content revealed as navbar expands
           */}
           <motion.div
-            className="w-full h-full flex pt-8 px-12 pb-8 bg-gradient-to-br from-navy via-navy to-navy-dark"
+            className="absolute inset-0 flex bg-white"
             animate={{ 
               opacity: isHovered ? 1 : 0, 
               pointerEvents: isHovered ? 'auto' : 'none',
             }}
-            transition={{ duration: 0.7, delay: 0.4, ease: [0.19, 1, 0.22, 1] }}
+            transition={{ 
+              duration: isHovered ? 0.3 : 0.35,
+              delay: isHovered ? 0.1 : 0,
+              ease: "easeInOut"
+            }}
           >
-            {/* LEFT COLUMN: Logo & Vertical Nav */}
-            <div className="w-1/3 flex flex-col border-r border-white/10 pr-8">
+            {/* LEFT COLUMN: Logo & Vertical Nav - Navy Background */}
+            <div className="w-1/3 flex flex-col pt-8 pl-12 pb-8 pr-8 bg-navy">
               {/* Logo in Expanded View - Consistent styling */}
               <div className="mb-10 pl-2">
                 <Link to="/" className="flex items-center">
@@ -292,15 +392,14 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
                 {NAV_ITEMS.map((item, idx) => (
                   <motion.div 
                     key={item.label}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0 }}
                     animate={{ 
-                      opacity: isHovered ? 1 : 0, 
-                      x: isHovered ? 0 : -20 
+                      opacity: isHovered ? 1 : 0
                     }}
                     transition={{ 
-                      duration: 0.5, 
-                      delay: isHovered ? 0.6 + (idx * 0.1) : 0,
-                      ease: [0.19, 1, 0.22, 1]
+                      duration: isHovered ? 0.25 : 0.2,
+                      delay: isHovered ? 0.15 + (idx * 0.03) : 0,
+                      ease: "easeInOut"
                     }}
                     onMouseEnter={() => setHoveredItem(item.label)}
                     className={`
@@ -328,12 +427,15 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
               {/* Bottom Actions */}
               <motion.div 
                 className="mt-auto space-y-3 pt-6 border-t border-white/10"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0 }}
                 animate={{ 
-                  opacity: isHovered ? 1 : 0, 
-                  y: isHovered ? 0 : 20 
+                  opacity: isHovered ? 1 : 0
                 }}
-                transition={{ duration: 0.6, delay: 1, ease: [0.19, 1, 0.22, 1] }}
+                transition={{ 
+                  duration: isHovered ? 0.25 : 0.2,
+                  delay: isHovered ? 0.3 : 0,
+                  ease: "easeInOut"
+                }}
               >
                 <a 
                   href="#" 
@@ -359,52 +461,92 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
               </motion.div>
             </div>
 
-            {/* RIGHT COLUMN: Preview Content - Dark Theme */}
-            <div className="w-2/3 pl-12 pt-4">
+            {/* RIGHT COLUMN: Preview Content - Solutions-Style Cards */}
+            <div className="w-2/3 pt-4 pl-8 pb-4 pr-8 bg-white overflow-y-auto">
               <AnimatePresence mode="wait">
                 {previewContent ? (
                   <motion.div
                     key={hoveredItem}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
-                    className="h-full flex flex-col"
+                    exit={{ opacity: 0, y: -5 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="h-full"
                   >
-                    <div className="relative h-64 rounded-2xl overflow-hidden shadow-2xl mb-8 group border border-white/10">
-                      <img 
-                        src={previewContent.image} 
-                        alt={previewContent.title}
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/95 via-navy-dark/50 to-transparent flex items-end p-8">
-                        <h3 className="text-3xl font-bold text-white">{previewContent.title}</h3>
-                      </div>
-                    </div>
+                    {/* Header */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.05, duration: 0.25 }}
+                      className="mb-4"
+                    >
+                      <h3 className="text-xl font-bold text-navy">
+                        {previewContent.title}
+                      </h3>
+                    </motion.div>
 
-                    <div className="flex-1">
-                      <p className="text-xl text-white/70 leading-relaxed mb-8 max-w-2xl">
-                        {previewContent.description}
-                      </p>
-
-                      <div className="grid grid-cols-2 gap-4">
-                        {previewContent.highlights.map((highlight, idx) => (
-                          <motion.div 
-                            key={idx}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ 
-                              delay: 0.2 + (idx * 0.08),
-                              duration: 0.4,
-                              ease: [0.19, 1, 0.22, 1]
-                            }}
-                            className="flex items-center p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-sustainability/30 transition-all duration-300"
-                          >
-                            <div className="w-2 h-2 rounded-full bg-sustainability mr-3" />
-                            <span className="text-white/90 font-medium">{highlight}</span>
-                          </motion.div>
-                        ))}
-                      </div>
+                    {/* Solution Cards - Like Solutions Page */}
+                    <div className="grid grid-cols-1 gap-4">
+                      {previewContent.modules.map((module: any, idx: number) => (
+                        <motion.div 
+                          key={idx}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ 
+                            delay: 0.08 + (idx * 0.05),
+                            duration: 0.25
+                          }}
+                          className="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-md hover:border-sustainability/40 transition-all duration-300"
+                        >
+                          <div className="flex gap-4">
+                            {/* Icon */}
+                            <div className="flex-shrink-0">
+                              <div className="w-12 h-12 bg-sky-50 rounded-lg flex items-center justify-center">
+                                <svg className="w-6 h-6 text-sustainability" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  {module.icon === 'FiCheck' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />}
+                                  {module.icon === 'FiShield' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />}
+                                  {module.icon === 'FiShoppingCart' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />}
+                                  {module.icon === 'FiFileText' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />}
+                                  {module.icon === 'FiTrendingUp' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />}
+                                  {module.icon === 'FiBarChart2' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />}
+                                  {module.icon === 'FiTarget' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />}
+                                  {module.icon === 'FiActivity' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />}
+                                  {module.icon === 'FiUsers' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />}
+                                  {module.icon === 'FiPackage' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />}
+                                  {module.icon === 'FiCheckCircle' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />}
+                                                  {module.icon === 'FiCalendar' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />}
+                                </svg>
+                              </div>
+                            </div>
+                            
+                            {/* Content */}
+                            <div className="flex-1 min-w-0">
+                              <h4 className="text-base font-bold text-navy mb-1">
+                                {module.title}
+                              </h4>
+                              <p className="text-xs text-sustainability font-semibold mb-2">
+                                {module.audience}
+                              </p>
+                              <p className="text-sm text-gray-700 mb-3">
+                                {module.purpose}
+                              </p>
+                              
+                              {/* Key Capabilities */}
+                              <div>
+                                <p className="text-xs font-bold text-navy uppercase mb-2">Key Capabilities</p>
+                                <ul className="space-y-1">
+                                  {module.capabilities.map((cap: string, capIdx: number) => (
+                                    <li key={capIdx} className="flex items-start gap-2">
+                                      <span className="text-sustainability mt-0.5">•</span>
+                                      <span className="text-xs text-gray-600">{cap}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
                     </div>
                   </motion.div>
                 ) : (
@@ -415,11 +557,8 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
                     className="h-full flex items-center justify-center"
                   >
                     <div className="text-center">
-                      <svg className="w-20 h-20 mx-auto mb-4 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-                      </svg>
-                      <p className="text-lg text-white/50 font-medium">Hover over a navigation item</p>
-                      <p className="text-sm text-white/30 mt-2">to preview details</p>
+                      <p className="text-base text-gray-300 font-medium mb-1">Hover over a menu item</p>
+                      <p className="text-sm text-gray-200">to explore details</p>
                     </div>
                   </motion.div>
                 )}
