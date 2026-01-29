@@ -168,12 +168,14 @@ const Terms = () => {
               Our legal team is available to help clarify any terms or answer questions about our services.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/contact"
-                className="bg-sustainability hover:bg-sustainability/90 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+              <a
+                href="https://calendly.com/manthan-sharma-aeronomy/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-sustainability hover:bg-sustainability/90 text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-block text-center"
               >
                 Contact Legal Team
-              </Link>
+              </a>
               <Link
                 to="/privacy"
                 className="bg-white hover:bg-gray-50 text-navy border border-navy px-8 py-3 rounded-lg font-semibold transition-colors"

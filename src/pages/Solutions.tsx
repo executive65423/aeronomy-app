@@ -361,7 +361,9 @@ const Solutions = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
               <motion.a
-                href="/#"
+                href="https://calendly.com/manthan-sharma-aeronomy/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-sustainability text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-base sm:text-lg hover:bg-sustainability/90 transition-colors shadow-lg inline-block text-center w-full sm:w-auto"

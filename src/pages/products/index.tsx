@@ -447,7 +447,7 @@ const Products = () => {
           </div>
           
           <div className="text-center">
-            <Link to="/contact">
+            <a href="https://calendly.com/manthan-sharma-aeronomy/30min" target="_blank" rel="noopener noreferrer">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -456,7 +456,7 @@ const Products = () => {
                 Schedule a Personalized Consultation
               <FiArrowRight className="ml-2" />
               </motion.button>
-            </Link>
+            </a>
           </div>
         </div>
       </section>

@@ -163,16 +163,16 @@ const About = () => {
               We're always looking for talented individuals who are passionate about transforming the aviation industry. Check out our open positions or contact us to learn more.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 px-4">
-              <Link to="/careers">
+              <a href="https://calendly.com/manthan-sharma-aeronomy/30min" target="_blank" rel="noopener noreferrer">
                 <button className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-white text-sustainability font-semibold rounded-lg shadow-md hover:bg-gray-100 transition-colors text-sm sm:text-base">
                   View Careers
                 </button>
-              </Link>
-              <Link to="/contact">
+              </a>
+              <a href="https://calendly.com/manthan-sharma-aeronomy/30min" target="_blank" rel="noopener noreferrer">
                 <button className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-sustainability-dark text-white font-semibold rounded-lg shadow-md hover:bg-sustainability-dark/90 transition-colors text-sm sm:text-base">
                   Contact Us
                 </button>
-              </Link>
+              </a>
             </div>
           </motion.div>
         </div>

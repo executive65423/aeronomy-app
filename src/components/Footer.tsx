@@ -25,28 +25,23 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Products Section */}
+          {/* Platform Section */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Products</h3>
+            <h3 className="text-xl font-bold mb-4">Platform</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/products/analytica" className="text-gray-300 hover:text-sustainability">
-                  Aeronomics Analytica
+                <Link to="/solutions" className="text-gray-300 hover:text-sustainability">
+                  Solutions
                 </Link>
               </li>
               <li>
-                <Link to="/products/safpro" className="text-gray-300 hover:text-sustainability">
-                  SAF-PRO Platform
-                </Link>
+                <a href="/#features" className="text-gray-300 hover:text-sustainability">
+                  Features
+                </a>
               </li>
               <li>
-                <Link to="/products/safsuite" className="text-gray-300 hover:text-sustainability">
-                  SAF-Suite Enterprise
-                </Link>
-              </li>
-              <li>
-                <Link to="/products" className="text-gray-300 hover:text-sustainability">
-                  All Products
+                <Link to="/newsletter" className="text-gray-300 hover:text-sustainability">
+                  Newsletter
                 </Link>
               </li>
             </ul>
@@ -62,9 +57,9 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-300 hover:text-sustainability">
+                <a href="https://calendly.com/manthan-sharma-aeronomy/30min" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-sustainability">
                   Contact
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

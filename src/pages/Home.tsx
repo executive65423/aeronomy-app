@@ -1,8 +1,9 @@
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { useRef, useState, Dispatch, SetStateAction, useEffect } from 'react'
-import RequestDemo from '../components/RequestDemo'
+import { useRef, useState, useEffect } from 'react'
 import FloatingDashboard from '../components/FloatingDashboard'
+import CustomerCarousel from '../components/CustomerCarousel'
+import NewsTicker from '../components/NewsTicker'
 import { 
   FiShoppingCart, FiUsers, FiBarChart, FiShield, 
   FiGlobe, FiSmartphone, FiArrowRight, FiCheck,
@@ -42,24 +43,7 @@ const SLIDESHOW_CONTENT = [
 // Background video for hero section
 const HERO_VIDEO = "/videos/clouds.mp4";
 
-interface HomeProps {
-  showDemoModal?: boolean;
-  setShowDemoModal?: Dispatch<SetStateAction<boolean>>;
-}
-
-const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
-  // Internal state for demo modal if not provided via props
-  const [internalShowDemoModal, setInternalShowDemoModal] = useState(false);
-  
-  // Use either the props or internal state for modal visibility
-  const isModalVisible = showDemoModal ?? internalShowDemoModal;
-  const toggleModal = (value: boolean) => {
-    if (setShowDemoModal) {
-      setShowDemoModal(value);
-    } else {
-      setInternalShowDemoModal(value);
-    }
-  };
+const Home = () => {
   
   // Refs for scroll animations
   const headingRef = useRef(null);
@@ -445,8 +429,13 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
 
   return (
     <div className="pt-0">
+      {/* News Ticker - Below Navbar */}
+      <div className="fixed top-[85px] sm:top-[90px] left-0 right-0 z-30">
+        <NewsTicker />
+      </div>
+
       {/* Hero Section with Video Background */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center overflow-hidden pt-[70px]">
         {/* Single video background */}
         <video
           className="absolute inset-0 w-full h-full object-cover"
@@ -477,18 +466,23 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
               That's <span className="text-white">Aero</span><span className="text-sustainability">nomy</span>.
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <motion.button
+              <motion.a
+                href="https://calendly.com/manthan-sharma-aeronomy/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="btn-primary"
-                onClick={() => toggleModal(true)}
+                className="btn-primary inline-block text-center"
               >
                 Request a Demo
-              </motion.button>
+              </motion.a>
             </div>
           </motion.div>
         </div>
       </section>
+
+      {/* Customer Carousel Section */}
+      <CustomerCarousel />
 
       {/* Player-specific Solutions Section */}
       <section className="py-20 bg-white relative overflow-hidden">
@@ -660,7 +654,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                   transition={{ duration: 0.6, delay: 0.6 }}
                   viewport={{ once: true }}
                 >
-                  <Link to="/products/analytica">
+                  <Link to="/solutions">
                     <button className="bg-sustainability hover:bg-sustainability/90 text-white font-semibold py-3 px-6 rounded-lg shadow-md flex items-center">
                       Learn More
                       <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -805,7 +799,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                   transition={{ duration: 0.6, delay: 0.6 }}
                   viewport={{ once: true }}
                 >
-                  <Link to="/products/safpro">
+                  <Link to="/solutions">
                     <button className="bg-sustainability hover:bg-sustainability/90 text-white font-semibold py-3 px-6 rounded-lg shadow-md flex items-center">
                       Learn More
                       <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -948,7 +942,7 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
                   transition={{ duration: 0.6, delay: 0.6 }}
                   viewport={{ once: true }}
                 >
-                  <Link to="/products/safsuite">
+                  <Link to="/solutions">
                     <button className="bg-sustainability hover:bg-sustainability/90 text-white font-semibold py-3 px-6 rounded-lg shadow-md flex items-center">
                       Learn More
                       <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1466,20 +1460,26 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-              <motion.button
+              <motion.a
+                href="https://calendly.com/manthan-sharma-aeronomy/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="btn-primary"
+                className="btn-primary inline-block text-center"
               >
                 Explore Workflows
-              </motion.button>
-              <motion.button
+              </motion.a>
+              <motion.a
+                href="https://calendly.com/manthan-sharma-aeronomy/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="btn-secondary"
+                className="btn-secondary inline-block text-center"
               >
                 Watch Demo
-              </motion.button>
+              </motion.a>
             </motion.div>
           </motion.div>
         </div>
@@ -1742,7 +1742,9 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
           </div>
           <div className="mt-8 sm:mt-12 text-center">
             <a
-              href="/contact"
+              href="https://calendly.com/manthan-sharma-aeronomy/30min"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block bg-sustainability text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg hover:bg-sustainability/90 transition-colors text-sm sm:text-base w-full sm:w-auto"
             >
               Get Your Custom Market Analysis
@@ -1780,21 +1782,21 @@ const Home = ({ showDemoModal = false, setShowDemoModal }: HomeProps) => {
               sustainable aviation fuel sourcing and compliance workflows.
             </p>
             <div className="flex justify-center px-4">
-              <motion.button
+              <motion.a
+                href="https://calendly.com/manthan-sharma-aeronomy/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-sustainability text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-base sm:text-lg hover:bg-sustainability/90 transition-colors shadow-lg w-full sm:w-auto"
-                onClick={() => toggleModal(true)}
+                className="bg-sustainability text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-base sm:text-lg hover:bg-sustainability/90 transition-colors shadow-lg w-full sm:w-auto inline-block text-center"
               >
                 Request Demo
-              </motion.button>
+              </motion.a>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Show the demo modal when requested */}
-      {isModalVisible && <RequestDemo onClose={() => toggleModal(false)} />}
     </div>
   )
 }

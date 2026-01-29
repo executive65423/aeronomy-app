@@ -231,7 +231,7 @@ const SAFPRO = () => {
               Schedule a demo to see how SAF-PRO can optimize your sustainable fuel procurement.
             </p>
             <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <a href="https://calendly.com/aeronomy/demo" target="_blank" rel="noopener noreferrer">
+              <a href="https://calendly.com/manthan-sharma-aeronomy/30min" target="_blank" rel="noopener noreferrer">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}

@@ -20,6 +20,7 @@ const Dashboard = lazy(() => import('./pages/Dashboard'))
 const Privacy = lazy(() => import('./pages/Privacy'))
 const Terms = lazy(() => import('./pages/Terms'))
 const Cookies = lazy(() => import('./pages/Cookies'))
+const Newsletter = lazy(() => import('./pages/Newsletter'))
 
 // Loading component
 const LoadingFallback = () => (
@@ -44,7 +45,6 @@ function App() {
     localStorage.setItem('theme', theme)
   }, [theme])
   
-  const [showDemoModal, setShowDemoModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -55,7 +55,8 @@ function App() {
   }, []);
 
   const handleRequestDemo = () => {
-    setShowDemoModal(true);
+    // Redirect to Calendly
+    window.open('https://calendly.com/manthan-sharma-aeronomy/30min', '_blank', 'noopener,noreferrer');
   };
 
   if (isLoading) {
@@ -81,7 +82,7 @@ function App() {
       <div className="flex-grow">
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
-            <Route path="/" element={<Home showDemoModal={showDemoModal} setShowDemoModal={setShowDemoModal} />} />
+            <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/solutions" element={<Solutions />} />
             <Route path="/products" element={<Products />} />
@@ -94,6 +95,7 @@ function App() {
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/cookies" element={<Cookies />} />
+            <Route path="/newsletter" element={<Newsletter />} />
             <Route path="*" element={<div className="p-10 text-center">Page Not Found</div>} />
           </Routes>
         </Suspense>
