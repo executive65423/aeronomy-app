@@ -429,10 +429,6 @@ const Home = () => {
 
   return (
     <div className="pt-0">
-      {/* News Ticker - Below Navbar */}
-      <div className="fixed top-[95px] sm:top-[100px] left-0 right-0 z-30">
-        <NewsTicker />
-      </div>
 
       {/* Hero Section with Video Background */}
       <section className="relative min-h-screen flex items-center overflow-hidden pt-[75px]">
@@ -450,6 +446,11 @@ const Home = () => {
         
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black/50 z-10"></div>
+
+        {/* News Ticker - Static at top of hero */}
+        <div className="absolute top-[100px] sm:top-[110px] left-0 right-0 z-20">
+          <NewsTicker />
+        </div>
         
         <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative z-20 pt-24 sm:pt-28 md:pt-0">
           <motion.div

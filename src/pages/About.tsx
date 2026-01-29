@@ -63,7 +63,9 @@ const About = () => {
               </h1>
               
               <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-3xl mx-auto">
-                We're creating the infrastructure for transparent, efficient, and compliant sustainable aviation fuel markets—connecting producers, airlines, and regulators on a single platform.
+                Buy, Track, Manage and Claim SAF — all in one place.<br />
+                That's Aeronomy.<br />
+                The one platform for all players of SAF.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">

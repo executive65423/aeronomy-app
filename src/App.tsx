@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import CustomScrollbar from './components/CustomScrollbar'
 import Footer from './components/Footer'
@@ -30,10 +30,17 @@ const LoadingFallback = () => (
 )
 
 function App() {
+  const location = useLocation();
+  
   const [theme, setTheme] = useState(() => {
     // Get the theme from localStorage, or default to 'light'
     return localStorage.getItem('theme') || 'light'
   })
+  
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   // Set the theme when it changes
   useEffect(() => {
