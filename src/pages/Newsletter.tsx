@@ -25,7 +25,7 @@ const Newsletter = () => {
           className="max-w-5xl mx-auto pt-12 mb-8"
         >
           <img
-            src="/images/pr.png"
+            src="/images/newer.png"
             alt="Yoki Green Energy Partnership"
             className="w-full h-auto rounded-xl shadow-2xl"
           />
