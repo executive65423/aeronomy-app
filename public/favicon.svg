@@ -8,9 +8,6 @@
     </clipPath>
   </defs>
 
-  <!-- Background Circle -->
-  <circle cx="32" cy="32" r="30" fill="#0B1C3D"/>
-
   <!-- Unified Airplane Base -->
   <path id="planeShape" d="
     M32 8

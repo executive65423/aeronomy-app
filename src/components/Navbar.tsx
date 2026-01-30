@@ -15,7 +15,6 @@ const NAV_ITEMS = [
 
 const Navbar = ({ onRequestDemo }: NavbarProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -24,14 +23,6 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
   // Check if current page has light theme (needs dark navbar)
   const lightThemedPages = ['/solutions', '/newsletter', '/about', '/privacy', '/terms', '/cookies'];
   const isLightPage = lightThemedPages.some(page => location.pathname.startsWith(page));
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     const checkLoginStatus = () => {
@@ -63,37 +54,16 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
 
   return (
     <>
-      <motion.nav
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4"
-        initial={false}
-        animate={{
-          paddingTop: isScrolled ? 8 : 16,
-        }}
-        transition={{ duration: 0.3, ease: 'easeOut' }}
-      >
-        <motion.div
-          className={`${isLightPage ? 'bg-navy' : 'bg-navy/95'} backdrop-blur-xl shadow-xl flex items-center justify-between`}
-          initial={false}
-          animate={{
-            width: isScrolled ? '95%' : '92%',
-            maxWidth: isScrolled ? '1000px' : '1200px',
-            height: isScrolled ? 56 : 64,
-            borderRadius: 9999,
-            paddingLeft: isScrolled ? 20 : 28,
-            paddingRight: isScrolled ? 20 : 28,
-          }}
-          transition={{ duration: 0.3, ease: 'easeOut' }}
+      <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4">
+        <div
+          className={`${isLightPage ? 'bg-navy' : 'bg-navy/95'} backdrop-blur-xl shadow-xl flex items-center justify-between w-[92%] max-w-[1200px] h-16 rounded-full px-7`}
         >
           {/* Logo */}
           <Link to="/" className="flex items-center flex-shrink-0">
-            <motion.span 
-              className="font-bold"
-              animate={{ fontSize: isScrolled ? '1.25rem' : '1.5rem' }}
-              transition={{ duration: 0.3 }}
-            >
+            <span className="text-2xl font-bold">
               <span className="text-white">Aero</span>
               <span className="text-sustainability">nomy</span>
-            </motion.span>
+            </span>
           </Link>
 
           {/* Desktop Links */}
@@ -156,8 +126,8 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
               </svg>
             </button>
           </div>
-        </motion.div>
-      </motion.nav>
+        </div>
+      </nav>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>

@@ -1,11 +1,9 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
+import { useState, useEffect, Suspense, lazy } from 'react'
+import { motion } from 'framer-motion'
 import Navbar from './components/Navbar'
-import CustomScrollbar from './components/CustomScrollbar'
 import Footer from './components/Footer'
-// Temporarily comment out LoadingAnimation to test if it's causing the issue
-// import LoadingAnimation from './components/LoadingAnimation'
-//testing
+import AirplaneBackToTop from './components/AirplaneBackToTop'
 // Lazy load page components
 const Home = lazy(() => import('./pages/Home'))
 const About = lazy(() => import('./pages/About'))
@@ -52,38 +50,24 @@ function App() {
     localStorage.setItem('theme', theme)
   }, [theme])
   
-  const [isLoading, setIsLoading] = useState(true);
+  type LoadingPhase = 'logo' | 'done';
+  const [loadingPhase, setLoadingPhase] = useState<LoadingPhase>('logo');
+  const [showFadingOverlay, setShowFadingOverlay] = useState(false);
 
   useEffect(() => {
-    // Show content after a shorter delay
-    setTimeout(() => {
-      setIsLoading(false);
+    // 1 second pause (loading), then fade to main content
+    const timer = setTimeout(() => {
+      setLoadingPhase('done');
+      setShowFadingOverlay(true);
     }, 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleRequestDemo = () => {
-    // Redirect to Calendly
     window.open('https://calendly.com/manthan-sharma-aeronomy/30min', '_blank', 'noopener,noreferrer');
   };
 
-  if (isLoading) {
-    return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-b from-blue-600 to-blue-900">
-        <div className="text-center">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
-            <span className="text-white">Aero</span>
-            <span className="text-sustainability">nomy</span>
-          </h1>
-          <div className="h-1 bg-sustainability rounded-full w-full animate-pulse" />
-          <p className="text-white/80 text-center mt-4">
-            Optimizing the future of SAF
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  return (
+  const mainContent = (
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-dark-surface text-gray-900 dark:text-white">
       <Navbar onRequestDemo={handleRequestDemo} />
       <div className="flex-grow">
@@ -108,9 +92,81 @@ function App() {
         </Suspense>
       </div>
       <Footer />
-      {/* Custom Scrollbar */}
-      <CustomScrollbar />
+      {/* Airplane: back-to-top, persistent across all pages */}
+      <AirplaneBackToTop playFlyIn={false} />
     </div>
+  );
+
+  // Logo + airplane loading bar – 5 second pause
+  if (loadingPhase === 'logo') {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-b from-blue-600 to-blue-900">
+        <div className="text-center">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
+            <span className="text-white">Aero</span>
+            <span className="text-sustainability">nomy</span>
+          </h1>
+          {/* Loading bar = airplane flying across (nose right = forward) */}
+          <div className="w-full max-w-md mx-auto h-12 mt-2 relative overflow-hidden">
+            <motion.div
+              className="absolute left-0 top-1/2 -translate-y-1/2"
+              animate={{ left: ['0%', '100%'] }}
+              transition={{
+                duration: 1,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+            >
+              <svg
+                className="w-10 h-10 text-white/95"
+                style={{ transform: 'rotate(90deg)' }}
+                viewBox="0 0 64 64"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden
+              >
+                <path
+                  d="M32 8C29 8 27 11 27 14V26L10 32V36L27 34V50L22 56V58L32 54L42 58V56L37 50V34L54 36V32L37 26V14C37 11 35 8 32 8Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </motion.div>
+          </div>
+          <p className="text-white/80 text-center mt-6">
+            Optimizing the future of SAF
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Fading overlay (same logo screen) – fades away when transitioning to main content
+  const fadingOverlay = showFadingOverlay && (
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-b from-blue-600 to-blue-900 pointer-events-none"
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 0 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      onAnimationComplete={() => setShowFadingOverlay(false)}
+    >
+      <div className="text-center">
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
+          <span className="text-white">Aero</span>
+          <span className="text-sustainability">nomy</span>
+        </h1>
+        <div className="w-full max-w-md mx-auto h-10 mt-2" />
+        <p className="text-white/80 text-center mt-6">
+          Optimizing the future of SAF
+        </p>
+      </div>
+    </motion.div>
+  );
+
+  return (
+    <>
+      {mainContent}
+      {fadingOverlay}
+    </>
   );
 }
 
