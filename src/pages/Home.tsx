@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion'
+import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useRef, useState, useEffect } from 'react'
 import FloatingDashboard from '../components/FloatingDashboard'
@@ -16,32 +16,14 @@ const fadeIn = {
   transition: { duration: 0.6 }
 };
 
-// Slideshow content for the information section
-const SLIDESHOW_CONTENT = [
-  {
-    title: "Aeronomics Analytica",
-    subtitle: "Your one stop for all SAF procurement needs",
-    description: "Optimize SAF procurement with Aeronomica Analytica today"
-  },
-  {
-    title: "Stop Overpaying for SAF",
-    subtitle: "Why waste millions?",
-    description: "Aeronomy Analytica's AI predicts price dips and locks in savings, slashing your SAF costs by 15%—that's 1.5 Million saved annually"
-  },
-  {
-    title: "Crush Compliance Chaos",
-    subtitle: "Ditch manual spreadsheets and consultants",
-    description: "Generate audit-ready CORSIA/EU ETS reports in minutes, not months—saving 200+ hours/year and avoiding $500K+ in penalties"
-  },
-  {
-    title: "Outsmart Volatility, Boost Margins",
-    subtitle: "SAF prices swinging wildly?",
-    description: "Our dynamic feedstock optimizer and procurement calendar ensure you buy low, blend smart, and save 8–12% even in turbulent markets"
-  }
-];
-
 // Background video for hero section
 const HERO_VIDEO = "/videos/clouds.mp4";
+
+const HERO_ROTATING_PHRASES = [
+  'Source SAF below market price',
+  'Automate compliance across EU ETS and CORSIA',
+  'Reduce manual overload',
+] as const;
 
 const Home = () => {
   
@@ -63,36 +45,16 @@ const Home = () => {
   
   // State for platform components tabs
   const [selectedPlatformTab, setSelectedPlatformTab] = useState('marketplace');
-  
-  // State for slideshow content and progress
-  const [slideshowIndex, setSlideshowIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
-  
-  // Slideshow rotation
-  useEffect(() => {
-    const interval = 5000; // Show each slide for 5 seconds
-    const step = 10; // Update progress every 10ms
-    
-    // Progress bar animation
-    const progressInterval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) return 0;
-        return prev + (step / interval) * 100;
-      });
-    }, step);
-    
-    // Slide transition
-    const slideshowInterval = setInterval(() => {
-      setSlideshowIndex(prevIndex => (prevIndex + 1) % SLIDESHOW_CONTENT.length);
-      setProgress(0);
-    }, interval);
-    
-    return () => {
-      clearInterval(slideshowInterval);
-      clearInterval(progressInterval);
-    };
-  }, []);
 
+  const [heroPhraseIndex, setHeroPhraseIndex] = useState(0);
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setHeroPhraseIndex((i) => (i + 1) % HERO_ROTATING_PHRASES.length);
+    }, 4000);
+    return () => window.clearInterval(id);
+  }, []);
+  
   // Features data
   const features = [
     {
@@ -256,7 +218,7 @@ const Home = () => {
   ];
 
   // State for player tabs
-  const [selectedPlayerTab, setSelectedPlayerTab] = useState('airlines');
+  const [selectedPlayerTab, setSelectedPlayerTab] = useState('airports');
 
   // Additional state for Features section
   const [activeSection, setActiveSection] = useState(0)
@@ -457,27 +419,101 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-2xl"
+            className="w-full"
           >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight text-white">
-              The only SAF platform you will ever need.
-            </h1>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-start">
+              {/* Left: headline + rotating underlined phrase */}
+              <div className="lg:col-span-7 text-left lg:self-center">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-6xl font-bold text-white leading-[1.12] tracking-tight">
+                  <span className="block">
+                    <span className="text-white">Aero</span>
+                    <span className="text-sustainability">nomy</span>
+                    <span> helps airlines, airports, and fuel buyers</span>
+                  </span>
+                  <span className="relative mt-3 md:mt-4 block h-[7rem] sm:h-[7.5rem] md:h-[8rem] lg:h-[9.5rem] xl:h-[10rem]">
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={HERO_ROTATING_PHRASES[heroPhraseIndex]}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -12 }}
+                        transition={{ duration: 0.35, ease: 'easeOut' }}
+                        className="absolute left-0 top-0 block max-w-[95%] text-white underline decoration-2 decoration-white/90 underline-offset-[10px]"
+                      >
+                        {HERO_ROTATING_PHRASES[heroPhraseIndex]}
+                      </motion.span>
+                    </AnimatePresence>
+                  </span>
+                </h1>
 
-            <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-6 sm:mb-8 text-white font-bold leading-tight">
-              That's <span className="text-white">Aero</span><span className="text-sustainability">nomy</span>.
-            </p>
-            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <motion.a
-                href="https://calendly.com/manthan-sharma-aeronomy/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn-primary inline-block text-center"
-              >
-                Request a Demo
-              </motion.a>
+                <div className="mt-6 sm:mt-8">
+                  <motion.a
+                    href="https://calendly.com/manthan-sharma-aeronomy/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="btn-primary inline-block text-center"
+                  >
+                    Request a Demo
+                  </motion.a>
+                </div>
+              </div>
+
+              {/* Right: supporting copy */}
+              <div className="lg:col-span-4 lg:col-start-9 text-left">
+                <div className="relative flex min-h-[340px] max-w-md flex-col overflow-hidden rounded-[28px] border border-white/35 bg-white/12 shadow-2xl backdrop-blur-2xl">
+                  <div className="absolute inset-0 bg-gradient-to-b from-navy/55 via-navy/35 to-transparent" />
+
+                  <div className="relative z-20 p-5 sm:p-6">
+                    <p className="text-xl sm:text-2xl font-bold text-white leading-snug">
+                      Aviation compliance shouldn't slow you down.
+                    </p>
+                    <p className="mt-3 text-base sm:text-lg font-semibold text-white/95 leading-relaxed">
+                      Aeronomy gives airlines, airports, and fuel buyers one platform to source SAF, manage certificates, and automate reporting across EU ETS, CORSIA, and internal carbon targets.
+                    </p>
+                  </div>
+
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[68%] overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-sustainability/35 via-sustainability/18 to-transparent" />
+                    <motion.div
+                      animate={{ x: ['0%', '-22%'] }}
+                      transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+                      className="absolute bottom-0 left-0 w-[220%]"
+                    >
+                      <svg viewBox="0 0 1440 320" className="h-48 w-full sm:h-56" preserveAspectRatio="none">
+                        <path
+                          fill="rgba(0, 160, 220, 0.82)"
+                          d="M0,192L40,202.7C80,213,160,235,240,240C320,245,400,235,480,218.7C560,203,640,181,720,181.3C800,181,880,203,960,213.3C1040,224,1120,224,1200,213.3C1280,203,1360,181,1400,170.7L1440,160L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"
+                        />
+                      </svg>
+                    </motion.div>
+                    <motion.div
+                      animate={{ x: ['-8%', '-30%'] }}
+                      transition={{ duration: 14, repeat: Infinity, ease: 'linear' }}
+                      className="absolute bottom-0 left-0 w-[220%] opacity-90"
+                    >
+                      <svg viewBox="0 0 1440 320" className="h-44 w-full sm:h-52" preserveAspectRatio="none">
+                        <path
+                          fill="rgba(10, 35, 66, 0.88)"
+                          d="M0,256L34.3,240C68.6,224,137,192,206,181.3C274.3,171,343,181,411,186.7C480,192,549,192,617,181.3C685.7,171,754,149,823,149.3C891.4,149,960,171,1029,186.7C1097.1,203,1166,213,1234,213.3C1302.9,213,1371,203,1406,197.3L1440,192L1440,320L1406,320C1371,320,1303,320,1234,320C1166,320,1097,320,1029,320C960,320,891,320,823,320C754,320,686,320,617,320C549,320,480,320,411,320C343,320,274,320,206,320C137,320,69,320,34,320L0,320Z"
+                        />
+                      </svg>
+                    </motion.div>
+                  </div>
+
+                  <div className="relative z-20 mt-auto px-5 pb-5 pt-8 sm:px-6 sm:pb-6 sm:pt-10">
+                    <p className="text-base sm:text-lg font-semibold leading-relaxed text-white">
+                      No manual entry. No fragmented tools. No missed filings.
+                    </p>
+                    <p className="mt-4 text-base sm:text-lg font-bold leading-relaxed text-white">
+                      From procurement to regulatory submission — handled.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
+
           </motion.div>
         </div>
       </section>
@@ -507,7 +543,7 @@ const Home = () => {
               viewport={{ once: true }}
               className="text-4xl md:text-5xl font-bold mb-6 text-navy"
             >
-              Built for Every Player in the SAF Ecosystem
+              Built for Every Player in the Industry
             </motion.h2>
             
             <motion.p
@@ -517,13 +553,29 @@ const Home = () => {
               viewport={{ once: true }}
               className="text-lg text-gray-600 max-w-3xl mx-auto"
             >
-              Our platform is tailored to address the specific needs of airlines, investors, and SAF producers.
+              Our platform is tailored to address the specific needs of airports, airlines, investors, and SAF producers.
             </motion.p>
           </div>
           
           {/* Player Tabs */}
           <div className="flex justify-center mb-8 sm:mb-12 px-4">
             <div className="inline-flex flex-wrap justify-center rounded-md shadow-sm p-1 bg-gray-100 gap-1" role="group">
+              <button
+                type="button"
+                className={`py-2 sm:py-3 px-3 sm:px-6 rounded-md shadow-sm font-medium flex items-center transition-all text-sm sm:text-base ${
+                  selectedPlayerTab === 'airports' 
+                    ? 'bg-navy text-white' 
+                    : 'text-gray-700 hover:bg-gray-200'
+                }`}
+                onClick={() => setSelectedPlayerTab('airports')}
+              >
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 19H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M6 19V10L12 6L18 10V19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M10 13H14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+                <span className="whitespace-nowrap">Airports & SAF Hubs</span>
+              </button>
               <button
                 type="button"
                 className={`py-2 sm:py-3 px-3 sm:px-6 rounded-md shadow-sm font-medium flex items-center transition-all text-sm sm:text-base ${
@@ -570,6 +622,151 @@ const Home = () => {
           </div>
           
           {/* Content based on selected tab */}
+          {selectedPlayerTab === 'airports' && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+              <div>
+                <motion.h3
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  viewport={{ once: true }}
+                  className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-navy"
+                >
+                  Turn SAF availability into measurable adoption
+                </motion.h3>
+                
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="text-gray-600 mb-6"
+                >
+                  Airports are becoming the center of SAF deployment, but availability, pricing, and compliance remain fragmented. Aeronomy gives airports and fuel infrastructure operators the tools to move from enabling SAF to actively scaling it.
+                </motion.p>
+                
+                <div className="space-y-4 mb-8">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: 0.3 }}
+                    viewport={{ once: true }}
+                    className="flex items-start"
+                  >
+                    <div className="bg-sustainability/10 p-2 rounded-full mr-3 flex-shrink-0">
+                      <svg className="w-5 h-5 text-sustainability" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-navy">Aggregate demand and source verified supply</h4>
+                      <p className="text-gray-600 text-sm">Bring together airline demand at your airport and match it with verified SAF producers through one coordinated workflow.</p>
+                    </div>
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: 0.4 }}
+                    viewport={{ once: true }}
+                    className="flex items-start"
+                  >
+                    <div className="bg-sustainability/10 p-2 rounded-full mr-3 flex-shrink-0">
+                      <svg className="w-5 h-5 text-sustainability" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-navy">Run incentives and track impact in real time</h4>
+                      <p className="text-gray-600 text-sm">Structure SAF incentive programs, monitor certificates, and quantify emissions impact across every participating carrier.</p>
+                    </div>
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: 0.5 }}
+                    viewport={{ once: true }}
+                    className="flex items-start"
+                  >
+                    <div className="bg-sustainability/10 p-2 rounded-full mr-3 flex-shrink-0">
+                      <svg className="w-5 h-5 text-sustainability" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-navy">Stay ahead of evolving SAF mandates</h4>
+                      <p className="text-gray-600 text-sm">Ensure compliance with ReFuelEU, UK SAF mandates, and voluntary decarbonization targets from a single operational view.</p>
+                    </div>
+                  </motion.div>
+                </div>
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <Link to="/solutions">
+                    <button className="bg-sustainability hover:bg-sustainability/90 text-white font-semibold py-3 px-6 rounded-lg shadow-md flex items-center">
+                      Learn More
+                      <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </button>
+                  </Link>
+                </motion.div>
+              </div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-200"
+              >
+                <div className="bg-navy-dark p-3 flex items-center justify-between">
+                  <div className="text-white text-lg font-medium">Airport SAF Hub Dashboard</div>
+                  <div className="bg-sustainability text-white text-xs px-2 py-1 rounded-md">LIVE DEMO</div>
+                </div>
+                
+                <div className="p-6">
+                  <div className="mb-6">
+                    <div className="text-sm text-gray-500 mb-1">Airport-Wide SAF Adoption</div>
+                    <div className="relative h-8 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-full bg-sustainability flex items-center text-xs text-white font-bold px-4 rounded-full" style={{ width: '64%' }}>64%</div>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-6 mb-6">
+                    <div>
+                      <div className="text-sm text-gray-500 mb-1">Aggregated Demand</div>
+                      <div className="text-2xl font-bold text-navy">8.4M gallons</div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-500 mb-1">Verified Suppliers</div>
+                      <div className="text-2xl font-bold text-navy">11 active</div>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-6">
+                    <div>
+                      <div className="text-sm text-gray-500 mb-1">Mandate Status</div>
+                      <div className="flex items-center">
+                        <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                        <span className="font-medium text-navy">On Track</span>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-500 mb-1">CO2e Reduction</div>
+                      <div className="text-2xl font-bold text-navy">58,200 tons</div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          )}
+          
           {selectedPlayerTab === 'airlines' && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
               <div>

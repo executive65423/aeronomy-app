@@ -87,28 +87,17 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Footer Bottom with Logo and Copyright */}
-        <div className="mt-8 sm:mt-12 flex flex-col md:flex-row justify-between items-center pt-6 sm:pt-8 border-t border-gray-700 gap-4">
-          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
-            <img 
-              src="/images/logo.jpg" 
-              alt="Aeronomy Logo" 
-              className="h-10 sm:h-12 w-auto"
-            />
-            <div className="text-gray-400 text-xs sm:text-sm text-center sm:text-left">
+        {/* Footer Bottom with Brand Lockup */}
+        <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-700">
+          <div className="flex flex-col items-start gap-3">
+            <Link to="/" className="inline-flex items-center flex-shrink-0">
+              <span className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-none">
+                <span className="text-white">Aero</span>
+                <span className="text-sustainability">nomy</span>
+              </span>
+            </Link>
+            <div className="text-gray-400 text-xs sm:text-sm text-left">
               © 2026 Aeronomy. All rights reserved.
-            </div>
-          </div>
-          <div className="w-full sm:w-auto">
-            <div className="bg-gray-800 px-4 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm text-white flex flex-wrap items-center justify-center gap-1 sm:gap-2">
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
-              <span className="whitespace-nowrap">CORSIA-Certified</span>
-              <span className="mx-1 sm:mx-2 hidden sm:inline">•</span>
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-blue-500 rounded-full"></div>
-              <span className="whitespace-nowrap">EU Taxonomy-Aligned</span>
-              <span className="mx-1 sm:mx-2 hidden sm:inline">•</span>
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
-              <span className="whitespace-nowrap">IRA Compliant</span>
             </div>
           </div>
         </div>
