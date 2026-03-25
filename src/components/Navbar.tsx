@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface NavbarProps {
@@ -15,23 +15,12 @@ const NAV_ITEMS = [
 
 const Navbar = ({ onRequestDemo }: NavbarProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
   const isHomePage = location.pathname === '/';
 
   // Check if current page has light theme (needs dark navbar)
   const lightThemedPages = ['/solutions', '/newsletter', '/about', '/privacy', '/terms', '/cookies'];
   const isLightPage = lightThemedPages.some(page => location.pathname.startsWith(page));
-
-  useEffect(() => {
-    const checkLoginStatus = () => {
-      setIsLoggedIn(localStorage.getItem('isLoggedIn') === 'true');
-    };
-    checkLoginStatus();
-    window.addEventListener('storage', checkLoginStatus);
-    return () => window.removeEventListener('storage', checkLoginStatus);
-  }, []);
 
   const scrollToFeatures = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -44,12 +33,6 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
     if (featuresSection) {
       featuresSection.scrollIntoView({ behavior: 'smooth' });
     }
-  };
-
-  const handleLoginClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    window.location.href = 'https://app.aeronomy.co';
-    if (mobileMenuOpen) setMobileMenuOpen(false);
   };
 
   return (
@@ -92,13 +75,6 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
 
           {/* Right Actions */}
           <div className="hidden lg:flex items-center gap-x-4 border-l border-white/20 pl-6 ml-6">
-            <a 
-              href="#" 
-              onClick={handleLoginClick} 
-              className="text-sm text-white/80 hover:text-white transition-colors duration-200"
-            >
-              {isLoggedIn ? 'Dashboard' : 'Login'}
-            </a>
             <motion.a 
               href="https://calendly.com/manthan-sharma-aeronomy/30min"
               target="_blank"
@@ -165,13 +141,6 @@ const Navbar = ({ onRequestDemo }: NavbarProps) => {
                 )
               ))}
               <div className="h-px bg-white/20 my-4" />
-              <a 
-                href="#" 
-                onClick={handleLoginClick} 
-                className="text-xl font-medium text-white/90 hover:text-white transition-colors"
-              >
-                {isLoggedIn ? 'Dashboard' : 'Login'}
-              </a>
               <a 
                 href="https://calendly.com/manthan-sharma-aeronomy/30min"
                 target="_blank" 
